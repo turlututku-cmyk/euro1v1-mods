@@ -73,9 +73,10 @@ MIT, see `LICENSE`. BepInEx and the other libraries keep their own licenses.
 
 BepInEx and everything else is **already inside the zip**, so there is nothing else to install.
 
-[![Download Euro Mods Menu 1.3.7 (with BepInEx)](https://img.shields.io/badge/Download-Euro%20Mods%20Menu%201.3.7%20%C2%B7%20with%20BepInEx-2ea44f?style=for-the-badge&logo=github)](https://github.com/turlututku-cmyk/euro1v1-mods/raw/main/download/Euro3v3_ModsMenu_1.3.7.zip)
+[![Download Euro Mods Menu 1.0.1 (with BepInEx)](https://img.shields.io/badge/Download-Euro%20Mods%20Menu%201.0.1%20%C2%B7%20with%20BepInEx-2ea44f?style=for-the-badge&logo=github)](https://github.com/turlututku-cmyk/euro1v1-mods/raw/main/download/Euro3v3_ModsMenu_1.0.1.zip)
 
-- File: `download/Euro3v3_ModsMenu_1.3.7.zip` (33 MB)
-- SHA-256: `e9d57652076bab0659157847779397073c7c1fe32dc8fcd3d6b03cc14d3c05c3`
+- Version: **1.0.1** (see `CHANGELOG.md`)
+- File: `download/Euro3v3_ModsMenu_1.0.1.zip` (33 MB)
+- SHA-256: `b78b16741c17ff996a062ec0341bad8d07a40b00b4578423e40cf7ac57fa1d27`
 - Extract it into the Euro3v3 game folder, start the game, press **F8** and GET Damage Numbers.
 - Updating: extract a newer zip over the old one. Your settings are kept.
