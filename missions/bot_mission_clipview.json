@@ -1,0 +1,620 @@
+{
+  "missionId": "bot_mission_clipview",
+  "missionName": "Clip Viewer Map",
+  "useNodeGraph": true,
+  "generatedStepGraphHash": "clipview-1",
+  "graph": {
+    "nodes": [
+      {
+        "nodeId": "start",
+        "nodeType": 0,
+        "displayName": "Start",
+        "position": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "width": 180.0,
+        "locked": true,
+        "speakerId": "Ana",
+        "subtitleText": "New dialogue line",
+        "voiceClip": {
+          "instanceID": 0
+        },
+        "audioClipAddressOrPath": "",
+        "audioClipAssetGuid": "",
+        "startDelay": 0.0,
+        "customDuration": 0.0,
+        "markerId": "",
+        "secondaryMarkerId": "",
+        "lookAtMarkerId": "",
+        "lookAtActorId": "",
+        "cinematicFocalLength": 35.0,
+        "attackerSpawnMarkerId": "",
+        "defenderSpawnMarkerId": "",
+        "savedLocationId": "",
+        "botProfileId": "",
+        "botInstanceId": "",
+        "targetBotInstanceId": "",
+        "botSpawns": [],
+        "teamId": -1,
+        "behaviorMode": 0,
+        "behaviorNotes": "",
+        "difficulty": 1.0,
+        "botDifficultyProfile": 2,
+        "botHealth": 100.0,
+        "botInvincible": false,
+        "reviveBotIfDead": true,
+        "clearBotVelocity": true,
+        "weaponType": 0,
+        "duration": 30.0,
+        "planPhaseDuration": 0.0,
+        "buildPhaseDuration": 30.0,
+        "attackWaveDuration": 180.0,
+        "infiniteWaves": true,
+        "maxWaves": 0,
+        "waitUntilFinished": true,
+        "playerCanSeeHostSettings": false,
+        "playerStartsAsAttacker": false,
+        "skipPregameCutscene": false,
+        "loadBaseLayoutForPhase": false,
+        "enabledPhaseEventOutputIds": [],
+        "botDirectives": [],
+        "botPriorities": [],
+        "targetStage": 1,
+        "objectiveType": 9,
+        "requiredAmount": 1.0,
+        "requiredCount": 1,
+        "buildPartType": 0,
+        "baseLayoutId": "",
+        "baseLayoutName": "MissionBase",
+        "levelLayoutId": "",
+        "levelLayoutName": "",
+        "uiText": "",
+        "uiEnabled": false,
+        "fadeRevealMode": 0,
+        "fadeCurve": {
+          "serializedVersion": "2",
+          "m_Curve": [
+            {
+              "serializedVersion": "3",
+              "time": 0.0,
+              "value": 0.0,
+              "inSlope": 0.0,
+              "outSlope": 0.0,
+              "tangentMode": 0,
+              "weightedMode": 0,
+              "inWeight": 0.0,
+              "outWeight": 0.0
+            },
+            {
+              "serializedVersion": "3",
+              "time": 1.0,
+              "value": 1.0,
+              "inSlope": 0.0,
+              "outSlope": 0.0,
+              "tangentMode": 0,
+              "weightedMode": 0,
+              "inWeight": 0.0,
+              "outWeight": 0.0
+            }
+          ],
+          "m_PreInfinity": 2,
+          "m_PostInfinity": 2,
+          "m_RotationOrder": 4
+        },
+        "variableName": "",
+        "variableValue": ""
+      },
+      {
+        "nodeId": "set_team_red",
+        "nodeType": 38,
+        "displayName": "Player Red Team",
+        "position": {
+          "x": 220.0,
+          "y": 0.0
+        },
+        "width": 250.0,
+        "locked": false,
+        "speakerId": "Ana",
+        "subtitleText": "New dialogue line",
+        "voiceClip": {
+          "instanceID": 0
+        },
+        "audioClipAddressOrPath": "",
+        "audioClipAssetGuid": "",
+        "startDelay": 0.0,
+        "customDuration": 0.0,
+        "markerId": "",
+        "secondaryMarkerId": "",
+        "lookAtMarkerId": "",
+        "lookAtActorId": "",
+        "cinematicFocalLength": 35.0,
+        "attackerSpawnMarkerId": "",
+        "defenderSpawnMarkerId": "",
+        "savedLocationId": "",
+        "botProfileId": "",
+        "botInstanceId": "",
+        "targetBotInstanceId": "",
+        "botSpawns": [],
+        "teamId": 1,
+        "behaviorMode": 0,
+        "behaviorNotes": "",
+        "difficulty": 1.0,
+        "botDifficultyProfile": 2,
+        "botHealth": 100.0,
+        "botInvincible": false,
+        "reviveBotIfDead": true,
+        "clearBotVelocity": true,
+        "weaponType": 0,
+        "duration": 30.0,
+        "planPhaseDuration": 0.0,
+        "buildPhaseDuration": 30.0,
+        "attackWaveDuration": 180.0,
+        "infiniteWaves": true,
+        "maxWaves": 0,
+        "waitUntilFinished": true,
+        "playerCanSeeHostSettings": false,
+        "playerStartsAsAttacker": false,
+        "skipPregameCutscene": false,
+        "loadBaseLayoutForPhase": false,
+        "enabledPhaseEventOutputIds": [],
+        "botDirectives": [],
+        "botPriorities": [],
+        "targetStage": 1,
+        "objectiveType": 9,
+        "requiredAmount": 1.0,
+        "requiredCount": 1,
+        "buildPartType": 0,
+        "baseLayoutId": "",
+        "baseLayoutName": "MissionBase",
+        "levelLayoutId": "",
+        "levelLayoutName": "",
+        "uiText": "",
+        "uiEnabled": false,
+        "fadeRevealMode": 0,
+        "fadeCurve": {
+          "serializedVersion": "2",
+          "m_Curve": [
+            {
+              "serializedVersion": "3",
+              "time": 0.0,
+              "value": 0.0,
+              "inSlope": 0.0,
+              "outSlope": 0.0,
+              "tangentMode": 0,
+              "weightedMode": 0,
+              "inWeight": 0.0,
+              "outWeight": 0.0
+            },
+            {
+              "serializedVersion": "3",
+              "time": 1.0,
+              "value": 1.0,
+              "inSlope": 0.0,
+              "outSlope": 0.0,
+              "tangentMode": 0,
+              "weightedMode": 0,
+              "inWeight": 0.0,
+              "outWeight": 0.0
+            }
+          ],
+          "m_PreInfinity": 2,
+          "m_PostInfinity": 2,
+          "m_RotationOrder": 4
+        },
+        "variableName": "",
+        "variableValue": ""
+      },
+      {
+        "nodeId": "spawn_bots",
+        "nodeType": 3,
+        "displayName": "Spawn Bot Teams",
+        "position": {
+          "x": 700.0,
+          "y": 0.0
+        },
+        "width": 250.0,
+        "locked": false,
+        "speakerId": "Ana",
+        "subtitleText": "New dialogue line",
+        "voiceClip": {
+          "instanceID": 0
+        },
+        "audioClipAddressOrPath": "",
+        "audioClipAssetGuid": "",
+        "startDelay": 0.0,
+        "customDuration": 0.0,
+        "markerId": "",
+        "secondaryMarkerId": "",
+        "lookAtMarkerId": "",
+        "lookAtActorId": "",
+        "cinematicFocalLength": 35.0,
+        "attackerSpawnMarkerId": "",
+        "defenderSpawnMarkerId": "",
+        "savedLocationId": "",
+        "botProfileId": "",
+        "botInstanceId": "red_support_1",
+        "targetBotInstanceId": "",
+        "botSpawns": [
+          {
+            "spawnId": "spawn_blue_enemy_1",
+            "displayName": "Viewer",
+            "botProfileId": "",
+            "botInstanceId": "blue_enemy_1",
+            "profilePictureId": "db03464fe76fecf46b6a29a3ec125796",
+            "portrait": {
+              "instanceID": 507358
+            },
+            "portraitAssetPath": "Assets/UI/BotProfilePicture/Teddy.png",
+            "portraitAssetGuid": "db03464fe76fecf46b6a29a3ec125796",
+            "overrideProfileCosmetics": false,
+            "cosmetics": [],
+            "markerId": "defense_blue_attack_spawn",
+            "teamId": 0,
+            "difficulty": 0.800000011920929,
+            "difficultyProfile": 1
+          }
+        ],
+        "teamId": -1,
+        "behaviorMode": 0,
+        "behaviorNotes": "",
+        "difficulty": 1.0,
+        "botDifficultyProfile": 2,
+        "botHealth": 100.0,
+        "botInvincible": true,
+        "reviveBotIfDead": true,
+        "clearBotVelocity": true,
+        "weaponType": 0,
+        "duration": 30.0,
+        "planPhaseDuration": 0.0,
+        "buildPhaseDuration": 30.0,
+        "attackWaveDuration": 180.0,
+        "infiniteWaves": true,
+        "maxWaves": 0,
+        "waitUntilFinished": true,
+        "playerCanSeeHostSettings": false,
+        "playerStartsAsAttacker": false,
+        "skipPregameCutscene": false,
+        "loadBaseLayoutForPhase": false,
+        "enabledPhaseEventOutputIds": [],
+        "botDirectives": [],
+        "botPriorities": [],
+        "targetStage": 1,
+        "objectiveType": 9,
+        "requiredAmount": 1.0,
+        "requiredCount": 1,
+        "buildPartType": 0,
+        "baseLayoutId": "",
+        "baseLayoutName": "MissionBase",
+        "levelLayoutId": "",
+        "levelLayoutName": "",
+        "uiText": "",
+        "uiEnabled": false,
+        "fadeRevealMode": 0,
+        "fadeCurve": {
+          "serializedVersion": "2",
+          "m_Curve": [
+            {
+              "serializedVersion": "3",
+              "time": 0.0,
+              "value": 0.0,
+              "inSlope": 0.0,
+              "outSlope": 0.0,
+              "tangentMode": 0,
+              "weightedMode": 0,
+              "inWeight": 0.0,
+              "outWeight": 0.0
+            },
+            {
+              "serializedVersion": "3",
+              "time": 1.0,
+              "value": 1.0,
+              "inSlope": 0.0,
+              "outSlope": 0.0,
+              "tangentMode": 0,
+              "weightedMode": 0,
+              "inWeight": 0.0,
+              "outWeight": 0.0
+            }
+          ],
+          "m_PreInfinity": 2,
+          "m_PostInfinity": 2,
+          "m_RotationOrder": 4
+        },
+        "variableName": "",
+        "variableValue": ""
+      },
+      {
+        "nodeId": "defense_phase",
+        "nodeType": 26,
+        "displayName": "Player Defense",
+        "position": {
+          "x": 1020.742431640625,
+          "y": -224.60586547851563
+        },
+        "width": 250.0,
+        "locked": false,
+        "speakerId": "Ana",
+        "subtitleText": "New dialogue line",
+        "voiceClip": {
+          "instanceID": 0
+        },
+        "audioClipAddressOrPath": "",
+        "audioClipAssetGuid": "",
+        "startDelay": 0.0,
+        "customDuration": 0.0,
+        "markerId": "",
+        "secondaryMarkerId": "",
+        "lookAtMarkerId": "",
+        "lookAtActorId": "",
+        "cinematicFocalLength": 35.0,
+        "attackerSpawnMarkerId": "defense_blue_attack_spawn",
+        "defenderSpawnMarkerId": "defense_red_defender_spawn",
+        "savedLocationId": "",
+        "botProfileId": "",
+        "botInstanceId": "",
+        "targetBotInstanceId": "",
+        "botSpawns": [],
+        "teamId": 1,
+        "behaviorMode": 0,
+        "behaviorNotes": "",
+        "difficulty": 1.0,
+        "botDifficultyProfile": 2,
+        "botHealth": 100.0,
+        "botInvincible": false,
+        "reviveBotIfDead": true,
+        "clearBotVelocity": true,
+        "weaponType": 0,
+        "duration": 30.0,
+        "planPhaseDuration": 0.0,
+        "buildPhaseDuration": 0.0,
+        "attackWaveDuration": 3600,
+        "infiniteWaves": true,
+        "maxWaves": 0,
+        "waitUntilFinished": true,
+        "playerCanSeeHostSettings": false,
+        "playerStartsAsAttacker": false,
+        "skipPregameCutscene": true,
+        "loadBaseLayoutForPhase": false,
+        "enabledPhaseEventOutputIds": [],
+        "botDirectives": [],
+        "botPriorities": [],
+        "targetStage": 5,
+        "objectiveType": 9,
+        "requiredAmount": 1.0,
+        "requiredCount": 1,
+        "buildPartType": 0,
+        "baseLayoutId": "",
+        "baseLayoutName": "MissionBase",
+        "levelLayoutId": "",
+        "levelLayoutName": "",
+        "uiText": "",
+        "uiEnabled": false,
+        "fadeRevealMode": 0,
+        "fadeCurve": {
+          "serializedVersion": "2",
+          "m_Curve": [
+            {
+              "serializedVersion": "3",
+              "time": 0.0,
+              "value": 0.0,
+              "inSlope": 0.0,
+              "outSlope": 0.0,
+              "tangentMode": 0,
+              "weightedMode": 0,
+              "inWeight": 0.0,
+              "outWeight": 0.0
+            },
+            {
+              "serializedVersion": "3",
+              "time": 1.0,
+              "value": 1.0,
+              "inSlope": 0.0,
+              "outSlope": 0.0,
+              "tangentMode": 0,
+              "weightedMode": 0,
+              "inWeight": 0.0,
+              "outWeight": 0.0
+            }
+          ],
+          "m_PreInfinity": 2,
+          "m_PostInfinity": 2,
+          "m_RotationOrder": 4
+        },
+        "variableName": "",
+        "variableValue": ""
+      }
+    ],
+    "links": [
+      {
+        "linkId": "link_start_team",
+        "fromNodeId": "start",
+        "fromPort": "exec",
+        "toNodeId": "set_team_red",
+        "toPort": "exec"
+      },
+      {
+        "linkId": "link_team_spawn",
+        "fromNodeId": "set_team_red",
+        "fromPort": "exec",
+        "toNodeId": "spawn_bots",
+        "toPort": "exec"
+      },
+      {
+        "linkId": "link_spawn_defense",
+        "fromNodeId": "spawn_bots",
+        "fromPort": "exec",
+        "toNodeId": "defense_phase",
+        "toPort": "exec"
+      }
+    ],
+    "pan": {
+      "x": -1166.8858642578125,
+      "y": 520.8397216796875
+    },
+    "zoom": 1.2168813943862916
+  },
+  "speakers": [
+    {
+      "speakerId": "Ana",
+      "displayName": "Ana",
+      "projectFolderId": "",
+      "projectOrder": 0,
+      "portrait": {
+        "instanceID": 0
+      },
+      "portraitAssetPath": "",
+      "portraitAssetGuid": ""
+    },
+    {
+      "speakerId": "Eric",
+      "displayName": "Eric",
+      "projectFolderId": "",
+      "projectOrder": 0,
+      "portrait": {
+        "instanceID": 0
+      },
+      "portraitAssetPath": "",
+      "portraitAssetGuid": ""
+    }
+  ],
+  "botProfiles": [],
+  "baseLayouts": [],
+  "levelLayouts": [],
+  "projectFolders": [],
+  "steps": [],
+  "markers": [
+    {
+      "markerId": "red_support_spawn",
+      "displayName": "Red Support Spawn",
+      "projectFolderId": "",
+      "projectOrder": 0,
+      "markerType": 2,
+      "position": {
+        "x": 26.999919891357423,
+        "y": 6.0,
+        "z": 25.999998092651368
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "markerId": "blue_enemy_spawn",
+      "displayName": "Blue Enemy Spawn",
+      "projectFolderId": "",
+      "projectOrder": 0,
+      "markerType": 2,
+      "position": {
+        "x": 27.00002670288086,
+        "y": -2.0,
+        "z": -37.0
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "markerId": "defense_blue_attack_spawn",
+      "displayName": "Defense Blue Attack Spawn",
+      "projectFolderId": "",
+      "projectOrder": 0,
+      "markerType": 2,
+      "position": {
+        "x": 27.00002670288086,
+        "y": -2.0,
+        "z": -37.0
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "markerId": "defense_red_defender_spawn",
+      "displayName": "Defense Red Defender Spawn",
+      "projectFolderId": "",
+      "projectOrder": 0,
+      "markerType": 2,
+      "position": {
+        "x": 26.999919891357423,
+        "y": 6.0,
+        "z": 25.999998092651368
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "markerId": "attack_red_attack_spawn",
+      "displayName": "Attack Red Attack Spawn",
+      "projectFolderId": "",
+      "projectOrder": 0,
+      "markerType": 2,
+      "position": {
+        "x": -43.00001907348633,
+        "y": -2.0,
+        "z": -37.0
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "markerId": "attack_blue_defender_spawn",
+      "displayName": "Attack Blue Defender Spawn",
+      "projectFolderId": "",
+      "projectOrder": 0,
+      "markerType": 2,
+      "position": {
+        "x": -43.27726745605469,
+        "y": -2.0000133514404299,
+        "z": 12.068642616271973
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    }
+  ],
+  "bots": [
+    {
+      "botId": "blue_enemy_1",
+      "displayName": "Viewer",
+      "profilePictureId": "db03464fe76fecf46b6a29a3ec125796",
+      "portrait": {
+        "instanceID": 507358
+      },
+      "portraitAssetPath": "Assets/UI/BotProfilePicture/Teddy.png",
+      "portraitAssetGuid": "db03464fe76fecf46b6a29a3ec125796",
+      "cosmetics": [],
+      "projectFolderId": "",
+      "projectOrder": 0,
+      "teamId": 0,
+      "difficulty": 0.800000011920929,
+      "difficultyProfile": 1,
+      "behaviorMode": 0,
+      "spawnMarkerId": "defense_blue_attack_spawn",
+      "position": {
+        "x": 26.275026321411134,
+        "y": -2.0,
+        "z": -36.275001525878909
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    }
+  ]
+}

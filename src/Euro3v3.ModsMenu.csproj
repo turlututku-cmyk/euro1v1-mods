@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>Euro3v3.ModsMenu</AssemblyName>
+    <RootNamespace>Euro3v3.ModsMenu</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <GameDir>$(MSBuildThisFileDirectory)..\..\</GameDir>
+    <OutputPath>$(GameDir)BepInEx\plugins\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="$(GameDir)BepInEx\core\BepInEx.Core.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx\core\BepInEx.Unity.IL2CPP.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx\core\BepInEx.Unity.Common.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx\core\0Harmony.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx\core\Il2CppInterop.Runtime.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx\core\Il2CppInterop.Common.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx\interop\Il2Cppmscorlib.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx\interop\UnityEngine.CoreModule.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx\interop\UnityEngine.UIElementsModule.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/UnityEngine.UI.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/Unity.TextMeshPro.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/UnityEngine.IMGUIModule.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/Unity.InputSystem.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/UnityEngine.AudioModule.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/UnityEngine.ScreenCaptureModule.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/UnityEngine.TextRenderingModule.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/UnityEngine.UnityWebRequestModule.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/UnityEngine.UnityWebRequestAudioModule.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/Unity.RenderPipelines.Core.Runtime.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/Unity.RenderPipelines.Universal.Runtime.dll" Private="false" />
+    <PackageReference Include="NLayer" Version="1.16.0" />
+    <PackageReference Include="NVorbis" Version="0.10.5" />
+    <Reference Include="$(GameDir)BepInEx/interop/UnityEngine.UIModule.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/Assembly-CSharp.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/Cinemachine.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/Mirror.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/UnityEngine.PhysicsModule.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/UnityEngine.ImageConversionModule.dll" Private="false" />
+    <Reference Include="$(GameDir)BepInEx/interop/UnityEngine.AnimationModule.dll" Private="false" />
+  </ItemGroup>
+</Project>
