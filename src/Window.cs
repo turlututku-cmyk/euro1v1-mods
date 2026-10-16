@@ -60,6 +60,9 @@ namespace Euro3v3.ModsMenu
         static bool _sortAz, _onlyOn;
         static int _page;
         static bool _built;
+
+        // Called right after startup so mods that are not installed are switched off before the menu is ever opened.
+        public static void EnsureBuilt() { if (!_built) Build(); }
         static readonly HashSet<string> _inst = new HashSet<string>();
         static readonly Dictionary<string, float> _installing = new Dictionary<string, float>();
         static string _unConfirm; static float _unUntil;
@@ -112,7 +115,7 @@ namespace Euro3v3.ModsMenu
             Add("Freecam (Team)", "Fair freecam: orbit your teammates only, never leave your team. F6 toggles.", "F", new Color(0.7f, 0.5f, 1f), false, Cfg.FreeOn, 13, "2026-10-16");
             Add("Input Display", "On-screen keys and mouse buttons you press. Great for clips.", "I", new Color(0.35f, 0.7f, 1f), false, Cfg.InputOn, 14, "2026-10-16");
             Add("Hit Sounds", "Custom hit and kill sounds, or your own files.", "S", new Color(1f, 0.75f, 0.15f), false, Cfg.HitOn, 15, "2026-10-16");
-            Add("Damage Numbers", "Floating damage numbers when you hit enemies.", "D", new Color(1f, 0.4f, 0.4f), false, Cfg.DmgOn, 16, "2026-10-16");
+            Add("Damage Numbers", "Floating damage numbers when you hit enemies.", "D", new Color(1f, 0.4f, 0.4f), true, Cfg.DmgOn, 16, "2026-10-16");
             Add("Clip Maker", "Records the last minutes of a match and replays it in 3D with a timeline and camera path.", "K", new Color(1f, 0.55f, 0.25f), false, Cfg.ClipOn, 17, "2026-10-16");
             Add("Match Stats", "Your damage, kills, deaths, K/D, accuracy and headshots on screen.", "M", new Color(1f, 0.75f, 0.15f), false, Cfg.StatsOn, 18, "2026-10-17");
             Add("Letterbox", "Cinematic black bars for clips and screenshots.", "L", new Color(0.7f, 0.7f, 0.75f), false, Cfg.BarsOn, 19, "2026-10-17");
@@ -145,8 +148,8 @@ namespace Euro3v3.ModsMenu
         {
             IEnumerable<ModInfo> q = _mods;
             if (_tab == 0) q = q.Where(IsInstalled);
-            if (_tab == 1) q = q.Where(m => m.Pane >= 0).OrderBy(m => IsInstalled(m) ? 1 : 0).ThenByDescending(m => m.Added);
-            if (_tab == 2) q = q.OrderByDescending(m => m.Added).ThenByDescending(m => _mods.IndexOf(m));
+            if (_tab == 1) q = q.Where(m => m.Featured).OrderBy(m => IsInstalled(m) ? 1 : 0).ThenByDescending(m => m.Added);
+            if (_tab == 2) q = q.Where(m => m.Featured || IsInstalled(m)).OrderByDescending(m => m.Added).ThenByDescending(m => _mods.IndexOf(m));
             if (_onlyOn) q = q.Where(m => m.On != null && m.On.Value);
             if (!string.IsNullOrWhiteSpace(_search))
             {

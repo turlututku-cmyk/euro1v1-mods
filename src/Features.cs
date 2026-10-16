@@ -10,6 +10,7 @@ namespace Euro3v3.ModsMenu
     public static partial class Features
     {
         public static bool PanelOpen;
+        static bool _builtOnce;
 
         static float _fps, _acc; static int _frames;
         static string _toast; static float _toastUntil;
@@ -24,6 +25,7 @@ namespace Euro3v3.ModsMenu
 
         public static void Update()
         {
+            if (!_builtOnce) { _builtOnce = true; try { Window.EnsureBuilt(); } catch (Exception e) { Plugin.Instance.Log.LogWarning("Mod list: " + e.Message); } }
             _acc += Time.unscaledDeltaTime; _frames++;
             if (_acc >= 0.5f) { _fps = _frames / _acc; _acc = 0; _frames = 0; }
 

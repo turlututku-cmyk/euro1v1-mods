@@ -69,7 +69,7 @@ namespace Euro3v3.ModsMenu
             Vol = B("Volume", "Master", 1f);
             BgOn = B("Background", "RunInBackground", true);
             Recent = B("Menu", "RecentMods", "");
-            Installed = B("Menu", "Installed", "Crosshair Changer|FPS Counter|Clock|Screenshot Key|FPS Limiter|FOV Changer|Volume Control|Run in Background");
+            Installed = B("Menu", "Installed", "");
             CrossRainbow = B("Crosshair", "Rainbow", false);
             VigOn = B("Vignette", "Enabled", false); VigStrength = B("Vignette", "Strength", 0.6f); VigColor = B("Vignette", "Color", 0);
             NeonOn = B("NeonBorder", "Enabled", false); NeonThick = B("NeonBorder", "Thickness", 6f); NeonRainbow = B("NeonBorder", "Rainbow", true); NeonColor = B("NeonBorder", "Color", 0);
