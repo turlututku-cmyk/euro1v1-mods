@@ -181,7 +181,7 @@ namespace Euro3v3.ModsMenu
             if (_hmLogCount++ < 25) Plugin.Instance.Log.LogInfo("Hitmarker '" + n + "' fired (" + via + ")");
             if (n.IndexOf("Health", StringComparison.OrdinalIgnoreCase) >= 0)
             {
-                if (dmg && Cfg.DmgHeal.Value && !_healPending) { _healPending = true; _healT0 = now; }
+                if (((Cfg.DmgOn.Value && Cfg.DmgHeal.Value) || (Cfg.ClOn.Value && Cfg.ClHeal.Value)) && !_healPending) { _healPending = true; _healT0 = now; }
                 return; // healing marker
             }
             bool kill = n.IndexOf("Kill", StringComparison.OrdinalIgnoreCase) >= 0;
@@ -370,6 +370,7 @@ namespace Euro3v3.ModsMenu
             Vector3 pos;
             try { pos = h.transform.position + Vector3.up * 2.1f; } catch { return; }
             _dmgNums.Add(new DmgNum { World = pos, T = Time.unscaledTime, Text = "+" + Mathf.RoundToInt(amount), C = new Color(0.3f, 1f, 0.45f), Kill = false });
+            ClHealGiven(Mathf.RoundToInt(amount));
         }
 
         static void DrawDamageNumbers()

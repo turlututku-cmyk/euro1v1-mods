@@ -28,7 +28,7 @@ namespace Euro3v3.ModsMenu
         public static ConfigEntry<string> KbMenu, KbShot, KbAim, KbSession, KbBuild, KbFreecam, KbFcNext, KbFcPrev, KbClipSave, KbClipRec, KbProfile, KbViewerExit;
         public static ConfigEntry<string>[] CmKeys = new ConfigEntry<string>[6];
         public static ConfigEntry<string>[] PhKeys = new ConfigEntry<string>[5];
-        public static ConfigEntry<bool> TpOn, TpDist, TpDead, ClOn, ClDealt, ClSummary;
+        public static ConfigEntry<bool> TpOn, TpDist, TpDead, ClOn, ClDealt, ClSummary, ClHeal;
         public static ConfigEntry<int> TpCorner, ClCorner;
         public static ConfigEntry<float> ClTime;
         public static ConfigEntry<int> AimDist;
@@ -133,7 +133,7 @@ namespace Euro3v3.ModsMenu
             LhThreshold = B("LowHealth", "BelowPercent", 30f); LhStrength = B("LowHealth", "Strength", 0.7f); LhVol = B("LowHealth", "Volume", 0.6f);
             AimOn = B("AimTrainer", "Enabled", false); AimMode = B("AimTrainer", "Mode", 0); AimTime = B("AimTrainer", "Seconds", 60f); AimSize = B("AimTrainer", "TargetSize", 0.7f); AimBest0 = B("AimTrainer", "BestGridshot", 0); AimBest1 = B("AimTrainer", "BestFlick", 0);
             TpOn = B("TeamPanel", "Enabled", false); TpCorner = B("TeamPanel", "Corner", 0); TpDist = B("TeamPanel", "DistanceArrow", true); TpDead = B("TeamPanel", "ShowDead", true);
-            ClOn = B("CombatLog", "Enabled", false); ClCorner = B("CombatLog", "Corner", 3); ClTime = B("CombatLog", "LineSeconds", 4f); ClDealt = B("CombatLog", "ShowDealt", true); ClSummary = B("CombatLog", "FightSummaries", true);
+            ClOn = B("CombatLog", "Enabled", false); ClCorner = B("CombatLog", "Corner", 3); ClTime = B("CombatLog", "LineSeconds", 4f); ClDealt = B("CombatLog", "ShowDealt", true); ClSummary = B("CombatLog", "FightSummaries", true); ClHeal = B("CombatLog", "ShowHealing", true);
             AimSound = B("AimTrainer", "HitSounds", true); AimCard = B("AimTrainer", "ResultsCard", true); AimDist = B("AimTrainer", "Distance", 1);
             AimBests[0] = AimBest0; AimBests[1] = AimBest1;
             { var an = new[] { "BestMoving", "BestTracking", "BestHeadLevel", "BestReaction" }; for (int i = 0; i < 4; i++) AimBests[i + 2] = B("AimTrainer", an[i], 0); }

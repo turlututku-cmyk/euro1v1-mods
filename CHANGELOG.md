@@ -6,6 +6,7 @@
   and the clip viewer's "match finished" rule.
 - **Session Stats leaderboard updates live every time** (every kill and hit). Freezing it until a round ends is now an optional switch (off by default).
 - **Combat Log damage matches Damage Numbers.** "Dealt" lines now use the same per-shot total that appears at your crosshair, instead of a separate scoreboard counter.
+- **Combat Log shows healing.** The healing you give a teammate (the same number Damage Numbers shows over them) and the health you regain, with one switch to turn it off.
 - The overlay title and the footer show your current keys.
 
 ## 1.0.3

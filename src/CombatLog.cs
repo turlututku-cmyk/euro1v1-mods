@@ -42,10 +42,10 @@ namespace Euro3v3.ModsMenu
                     _clFightTaken += d; _clLastFight = now;
                     ClAdd("-" + Mathf.RoundToInt(d) + "  taken", new Color(1f, 0.4f, 0.4f));
                 }
-                else if (!reset && hp > _clLastHp + 0.5f && alive)
+                else if (!reset && hp > _clLastHp + 0.5f && alive && Cfg.ClHeal.Value)
                 {
                     float d = hp - _clLastHp;
-                    ClAdd("+" + Mathf.RoundToInt(d) + "  healed", new Color(0.4f, 1f, 0.55f));
+                    ClAdd("+" + Mathf.RoundToInt(d) + "  health regained", new Color(0.35f, 0.85f, 0.5f));
                 }
                 if (_clHeadsAtShot < 0) _clHeadsAtShot = heads;
 
@@ -66,6 +66,13 @@ namespace Euro3v3.ModsMenu
         }
 
         static int _clHeadsAtShot = -1;
+
+        // Called with the same healing total Damage Numbers shows over the teammate you healed.
+        internal static void ClHealGiven(int amount)
+        {
+            if (!Cfg.ClOn.Value || !Cfg.ClHeal.Value) return;
+            ClAdd("+" + amount + "  healed a teammate", new Color(0.4f, 1f, 0.55f));
+        }
 
         // Called with the very same per-shot total that Damage Numbers shows at your crosshair, so the two can never disagree.
         internal static void ClShotDealt(int amount, bool kill)

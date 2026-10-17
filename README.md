@@ -24,7 +24,7 @@ Every mod has its own picture, and its **version is its fix count**: `v1.0.4` me
 |---|---|
 | Crosshair | **Crosshair Changer** (6 styles, colors, outline, rainbow), **Crosshair Profiles** (save and switch presets) |
 | Overlays | **FPS Counter**, **Clock**, **FPS Graph**, **Match Stats**, **Input Display**, **Notes** |
-| Combat feedback | **Hit Sounds**, **Damage Numbers** (one number per shot, healing +N), **Kill Messages** ("You killed X", "You assisted Y for X", "You were sniped by Z"), **Announcer** (double/triple kills, sprees), **Kill Confetti**, **Low Health Warning** (pulsing red edges, heartbeat), **Combat Log** (damage taken and dealt, healing, fight summaries) |
+| Combat feedback | **Hit Sounds**, **Damage Numbers** (one number per shot, healing +N), **Kill Messages** ("You killed X", "You assisted Y for X", "You were sniped by Z"), **Announcer** (double/triple kills, sprees), **Kill Confetti**, **Low Health Warning** (pulsing red edges, heartbeat), **Combat Log** (damage taken and dealt, healing given and regained, fight summaries) |
 | Get better | **Performance Coach** (tips after every round and match from your own stats), **Aim Trainer** (six drills, warm-up routine, results and tips), **Build Trainer**, **Practice Launcher** (one-click bot matches), **Session Stats** (live leaderboard, with an optional freeze between rounds) |
 | Match tools | **Team Panel** (your teammates' health, weapon, distance and an arrow, your team only), **Scoreboard Screenshot** (result card and PNG when a match ends), **Chat Macros** (quick messages on a key), **Chat Filter** (spam, swearing and blocked players), **Match Found Alert** (chime and taskbar flash, queue timer) |
 | Jokes | **Death Taunts**, **Sad Trombone**, Announcer and Kill Confetti |
@@ -98,6 +98,6 @@ BepInEx and everything else is **already inside the zip**, so there is nothing e
 
 - Version: **1.0.4** (see `CHANGELOG.md`)
 - File: `download/Euro3v3_ModsMenu_1.0.4.zip` (33 MB)
-- SHA-256: `49cfdf3b55b9eacc30b0c5c8a38b7442f84c6edf43cdae086dec282580f8ae25`
+- SHA-256: `ea85d54a4034dc94fbc819ebaa6377e64cbc39f2ce1d5b75be388068bc28ab6c`
 - Extract it into the Euro3v3 game folder, start the game, press **F8** and GET the mods you want.
 - Updating: extract a newer zip over the old one. Your settings are kept.

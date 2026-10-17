@@ -43,7 +43,7 @@ namespace Euro3v3.ModsMenu
                 "Streams about 10 seconds at a time instead of one 83 MB array") },
             { "Hit Sounds", new FixLog("v1.0.", "Custom sounds decode with a size cap, so they cannot use much memory") },
             { "Session Stats", new FixLog("v1.0.", "The leaderboard can be frozen until a round ends", "The overlay key can be rebound", "The leaderboard updates live every time (freezing is optional)", "Round ends are detected (the game's state name was being read wrongly)") },
-            { "Combat Log", new FixLog("v1.0.", "Damage dealt uses the same per-shot total as Damage Numbers") },
+            { "Combat Log", new FixLog("v1.0.", "Damage dealt uses the same per-shot total as Damage Numbers", "Shows the healing you give, with the same numbers as Damage Numbers") },
             { "Scoreboard Screenshot", new FixLog("v1.0.", "Match end is detected (the game's state name was being read wrongly)") },
             { "Performance Coach", new FixLog("v1.0.", "Rounds and matches are detected (the game's state name was being read wrongly)") },
             { "Team Panel", new FixLog("v1.0.", "Only shows during a match (the game's state name was being read wrongly)") },
