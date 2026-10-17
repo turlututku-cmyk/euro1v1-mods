@@ -57,7 +57,7 @@ namespace Euro3v3.ModsMenu
             EnableRow(Cfg.SsOn);
             Tog("On-screen leaderboard", Cfg.SsOverlay);
             KeyRow("Overlay key", Cfg.KbSession, "F3");
-            Tog("Update only at the end of each round", Cfg.SsRoundEnd);
+            Tog("Freeze between rounds", Cfg.SsRoundEnd);
             Tog("Pop up the leaderboard after each round", Cfg.SsPopup);
             var c = Ctl("Position");
             Cfg.SsCorner.Value = G.Segmented(c, Corners, Cfg.SsCorner.Value);

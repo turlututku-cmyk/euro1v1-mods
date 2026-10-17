@@ -211,9 +211,10 @@ namespace Euro3v3.ModsMenu
             var top = Leaderboard(5);
             var me = LocalRow();
             bool waiting = top.Count == 0 && Cfg.SsRoundEnd.Value;
-            if (waiting && _prevState == "") return;   // nothing to show outside a match
+            if (top.Count == 0 && _prevState == "") return;   // nothing to show outside a match
             var r = Corner(Cfg.SsCorner.Value, 300f, 56f + Mathf.Max(top.Count, waiting ? 1 : 0) * 22f + (me != null ? 26f : 0f), 80f);
-            string title = !Cfg.SsRoundEnd.Value ? "SESSION   (F3 hides)" : SnapRound > 0 ? "AFTER ROUND " + SnapRound + (Cfg.SsOverlay.Value ? "   (F3 hides)" : "") : "SESSION   (updates each round)";
+            string kh = BindLabel(Cfg.KbSession.Value);
+            string title = !Cfg.SsRoundEnd.Value ? "SESSION   LIVE   (" + kh + " hides)" : SnapRound > 0 ? "AFTER ROUND " + SnapRound + (Cfg.SsOverlay.Value ? "   (" + kh + " hides)" : "") : "SESSION   (frozen until a round ends)";
             Card(r, title);
             if (waiting) G.Label(new Rect(r.x + 12, r.y + 44, r.width - 20, 22), "Waiting for the first round to end", 12, G.Dim, TextAnchor.MiddleLeft);
             G.Label(new Rect(r.x + 12, r.y + 24, 130, 20), "Player", 11, G.Dim);

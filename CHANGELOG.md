@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.4
+- **Round and match detection finally works.** The game's phase (build, attack, ending ...) was being read with the wrong name, so every phase looked the same and round ends, match ends and
+  "in a match" checks never fired. It now reads the real phase name. This fixes the Session Stats round snapshot, Scoreboard Screenshot, Performance Coach round and match summaries, Team Panel (match only)
+  and the clip viewer's "match finished" rule.
+- **Session Stats leaderboard updates live every time** (every kill and hit). Freezing it until a round ends is now an optional switch (off by default).
+- **Combat Log damage matches Damage Numbers.** "Dealt" lines now use the same per-shot total that appears at your crosshair, instead of a separate scoreboard counter.
+- The overlay title and the footer show your current keys.
+
 ## 1.0.3
 - **Every hotkey can be changed.** Click the key box on a mod's page and press the new key (Esc cancels, Delete unbinds, RESET restores the default).
   Covers the menu key, screenshot, Aim Trainer, Session Stats overlay, Build Trainer, Freecam (toggle and teammate keys), Clip Maker (save, record, leave viewer),

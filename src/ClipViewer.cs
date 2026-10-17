@@ -44,8 +44,7 @@ namespace Euro3v3.ModsMenu
             {
                 var gm = GameModeManager.instance;
                 if (gm == null || gm._state == null) return false;
-                var o = new Il2CppSystem.Object(Il2CppInterop.Runtime.IL2CPP.Il2CppObjectBaseToPtr(gm._state));
-                return o.GetType().Name == "EndingState";
+                return StateName() == "EndingState";
             }
             catch { return false; }
         }

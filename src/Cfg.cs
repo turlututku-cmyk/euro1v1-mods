@@ -117,7 +117,7 @@ namespace Euro3v3.ModsMenu
             KmOn = B("KillMessages", "Enabled", false); KmCorner = B("KillMessages", "Corner", 0); KmTime = B("KillMessages", "Seconds", 5f); KmOthers = B("KillMessages", "ShowOthers", false); KmHead = B("KillMessages", "TagHeadshots", true);
             AnnOn = B("Announcer", "Enabled", false); AnnSize = B("Announcer", "Size", 52f); AnnSound = B("Announcer", "Sound", true); AnnVol = B("Announcer", "Volume", 0.7f);
             ConfOn = B("KillConfetti", "Enabled", false); ConfAmount = B("KillConfetti", "Amount", 140f); ConfHead = B("KillConfetti", "DoubleOnHeadshot", true); ConfAssist = B("KillConfetti", "OnAssists", false);
-            SsOn = B("SessionStats", "Enabled", false); SsOverlay = B("SessionStats", "Overlay", true); SsCorner = B("SessionStats", "Corner", 1); SsRoundEnd = B("SessionStats", "RoundEnd", true); SsPopup = B("SessionStats", "Popup", true);
+            SsOn = B("SessionStats", "Enabled", false); SsOverlay = B("SessionStats", "Overlay", true); SsCorner = B("SessionStats", "Corner", 1); SsRoundEnd = B("SessionStats", "FreezeUntilRoundEnd", false); SsPopup = B("SessionStats", "Popup", true);
             DtOn = B("DeathTaunts", "Enabled", false); DtStyle = B("DeathTaunts", "Style", 0); DtSize = B("DeathTaunts", "TextSize", 46f); DtKiller = B("DeathTaunts", "UseKillerName", true);
             StOn = B("SadTrombone", "Enabled", false); StMisses = B("SadTrombone", "MissesInARow", 5f); StVol = B("SadTrombone", "Volume", 0.7f); StText = B("SadTrombone", "Text", true);
             SbOn = B("ScoreboardShot", "Enabled", false); SbCard = B("ScoreboardShot", "DrawResultCard", true); SbDelay = B("ScoreboardShot", "DelaySeconds", 2f);

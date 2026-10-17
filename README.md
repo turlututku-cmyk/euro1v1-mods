@@ -25,7 +25,7 @@ Every mod has its own picture, and its **version is its fix count**: `v1.0.4` me
 | Crosshair | **Crosshair Changer** (6 styles, colors, outline, rainbow), **Crosshair Profiles** (save and switch presets) |
 | Overlays | **FPS Counter**, **Clock**, **FPS Graph**, **Match Stats**, **Input Display**, **Notes** |
 | Combat feedback | **Hit Sounds**, **Damage Numbers** (one number per shot, healing +N), **Kill Messages** ("You killed X", "You assisted Y for X", "You were sniped by Z"), **Announcer** (double/triple kills, sprees), **Kill Confetti**, **Low Health Warning** (pulsing red edges, heartbeat), **Combat Log** (damage taken and dealt, healing, fight summaries) |
-| Get better | **Performance Coach** (tips after every round and match from your own stats), **Aim Trainer** (six drills, warm-up routine, results and tips), **Build Trainer**, **Practice Launcher** (one-click bot matches), **Session Stats** (leaderboard that updates at the end of each round) |
+| Get better | **Performance Coach** (tips after every round and match from your own stats), **Aim Trainer** (six drills, warm-up routine, results and tips), **Build Trainer**, **Practice Launcher** (one-click bot matches), **Session Stats** (live leaderboard, with an optional freeze between rounds) |
 | Match tools | **Team Panel** (your teammates' health, weapon, distance and an arrow, your team only), **Scoreboard Screenshot** (result card and PNG when a match ends), **Chat Macros** (quick messages on a key), **Chat Filter** (spam, swearing and blocked players), **Match Found Alert** (chime and taskbar flash, queue timer) |
 | Jokes | **Death Taunts**, **Sad Trombone**, Announcer and Kill Confetti |
 | Visuals | **Better Visuals** (vignette, neon border, particles, cursor trail, UI theme, rainbow guns and text, HUD cleaner, health label), **RTX Mode**, **Letterbox**, **Screen Tint** |
@@ -94,10 +94,10 @@ MIT, see `LICENSE`. BepInEx and the other libraries keep their own licenses.
 
 BepInEx and everything else is **already inside the zip**, so there is nothing else to install.
 
-[![Download Euro Mods Menu 1.0.3 (with BepInEx)](https://img.shields.io/badge/Download-Euro%20Mods%20Menu%201.0.3%20%C2%B7%20with%20BepInEx-2ea44f?style=for-the-badge&logo=github)](https://github.com/turlututku-cmyk/euro1v1-mods/raw/main/download/Euro3v3_ModsMenu_1.0.3.zip)
+[![Download Euro Mods Menu 1.0.4 (with BepInEx)](https://img.shields.io/badge/Download-Euro%20Mods%20Menu%201.0.4%20%C2%B7%20with%20BepInEx-2ea44f?style=for-the-badge&logo=github)](https://github.com/turlututku-cmyk/euro1v1-mods/raw/main/download/Euro3v3_ModsMenu_1.0.4.zip)
 
-- Version: **1.0.3** (see `CHANGELOG.md`)
-- File: `download/Euro3v3_ModsMenu_1.0.3.zip` (33 MB)
-- SHA-256: `b863a50b152d56c1d085fde462b55a688f6fb245ee19f028c4bf7a4c6df15a8a`
+- Version: **1.0.4** (see `CHANGELOG.md`)
+- File: `download/Euro3v3_ModsMenu_1.0.4.zip` (33 MB)
+- SHA-256: `49cfdf3b55b9eacc30b0c5c8a38b7442f84c6edf43cdae086dec282580f8ae25`
 - Extract it into the Euro3v3 game folder, start the game, press **F8** and GET the mods you want.
 - Updating: extract a newer zip over the old one. Your settings are kept.

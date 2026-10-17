@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Euro3v3.ModsMenu
 {
     // Combat Log: a live feed of the damage YOU take, the damage you deal, healing, and a short summary when a fight ends.
-    // Built only from your own health and your own scoreboard stats.
+    // Damage taken is the drop in your own health; damage dealt is the same per-shot total Damage Numbers shows.
     public static partial class Features
     {
         class ClLine { public string Text; public Color C; public float T; }
@@ -47,14 +47,7 @@ namespace Euro3v3.ModsMenu
                     float d = hp - _clLastHp;
                     ClAdd("+" + Mathf.RoundToInt(d) + "  healed", new Color(0.4f, 1f, 0.55f));
                 }
-                if (Cfg.ClDealt.Value && dmg > _clLastDmg)
-                {
-                    int d = dmg - _clLastDmg;
-                    bool head = heads > _clLastHeads;
-                    _clFightDealt += d; _clLastFight = now;
-                    ClAdd("+" + d + "  dealt" + (head ? "  (headshot)" : ""), head ? new Color(1f, 0.85f, 0.3f) : new Color(0.45f, 0.85f, 1f));
-                }
-                if (alive && heads > _clLastHeads) { }
+                if (_clHeadsAtShot < 0) _clHeadsAtShot = heads;
 
                 if (_clWasAlive && !alive)
                 {
@@ -70,6 +63,23 @@ namespace Euro3v3.ModsMenu
                 _clLastHp = hp; _clLastDmg = dmg; _clLastHeads = heads; _clWasAlive = alive;
             }
             catch { }
+        }
+
+        static int _clHeadsAtShot = -1;
+
+        // Called with the very same per-shot total that Damage Numbers shows at your crosshair, so the two can never disagree.
+        internal static void ClShotDealt(int amount, bool kill)
+        {
+            if (!Cfg.ClOn.Value || !Cfg.ClDealt.Value) return;
+            bool head = false;
+            try
+            {
+                var me = LocalPlayer();
+                if (me != null) { int h = me.stat_headshots; head = _clHeadsAtShot >= 0 && h > _clHeadsAtShot; _clHeadsAtShot = h; }
+            }
+            catch { }
+            _clFightDealt += amount; _clLastFight = Time.unscaledTime;
+            ClAdd("+" + amount + "  dealt" + (kill ? "  (KILL)" : head ? "  (headshot)" : ""), kill ? new Color(1f, 0.4f, 0.4f) : head ? new Color(1f, 0.85f, 0.3f) : new Color(0.45f, 0.85f, 1f));
         }
 
         static void DrawCombatLog()

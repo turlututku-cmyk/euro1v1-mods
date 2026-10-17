@@ -22,8 +22,9 @@ namespace Euro3v3.ModsMenu
             {
                 var gm = GameModeManager.instance;
                 if (gm == null || gm._state == null) return null;
-                var o = new Il2CppSystem.Object(Il2CppInterop.Runtime.IL2CPP.Il2CppObjectBaseToPtr(gm._state));
-                return o.GetType().Name;
+                IntPtr ptr = Il2CppInterop.Runtime.IL2CPP.Il2CppObjectBaseToPtr(gm._state);
+                IntPtr klass = Il2CppInterop.Runtime.IL2CPP.il2cpp_object_get_class(ptr);
+                return System.Runtime.InteropServices.Marshal.PtrToStringAnsi(Il2CppInterop.Runtime.IL2CPP.il2cpp_class_get_name(klass));
             }
             catch { return null; }
         }

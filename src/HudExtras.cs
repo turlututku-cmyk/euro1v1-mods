@@ -338,6 +338,7 @@ namespace Euro3v3.ModsMenu
             Vector3 pos;
             try { pos = h.transform.position + Vector3.up * 2.1f; } catch { return; }
             _dmgNums.Add(new DmgNum { World = pos, T = Time.unscaledTime, Text = Mathf.RoundToInt(amount).ToString(), C = col, Kill = _dmgShotKill });
+            ClShotDealt(Mathf.RoundToInt(amount), _dmgShotKill);
         }
 
         static void FinishHeal()
@@ -384,6 +385,7 @@ namespace Euro3v3.ModsMenu
                 if ((any && el >= 0.3f) || el >= 0.9f) FinishShot();
             }
             if (_healPending && Time.unscaledTime - _healT0 >= 0.3f) FinishHeal();
+            if (!Cfg.DmgOn.Value) { _dmgNums.Clear(); return; }   // only the Combat Log wanted the numbers: nothing to draw
             if (_dmgNums.Count == 0) return;
             var cam = Cam();
             if (cam == null) return;

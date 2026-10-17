@@ -5,7 +5,7 @@ namespace Euro3v3.ModsMenu
 {
     public static partial class Features
     {
-        public static bool DmgActive => Cfg.DmgOn.Value;
+        public static bool DmgActive => Cfg.DmgOn.Value || (Cfg.ClOn.Value && Cfg.ClDealt.Value);
 
         // The camera the game actually renders the world with (Camera.main is null in some menus).
         public static Camera Cam()
