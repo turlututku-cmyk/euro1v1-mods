@@ -34,9 +34,10 @@ namespace Euro3v3.ModsMenu
             var kb = Keyboard.current;
             if (kb != null)
             {
-                if (kb.f8Key.wasPressedThisFrame) PanelOpen = !PanelOpen;
-                if (PanelOpen && kb.escapeKey.wasPressedThisFrame) PanelOpen = false;
-                if (Cfg.ShotOn.Value && kb.f12Key.wasPressedThisFrame) Screenshot();
+                UpdateKeybindCapture();
+                if (KeyHit(Cfg.KbMenu.Value)) PanelOpen = !PanelOpen;
+                if (PanelOpen && kb.escapeKey.wasPressedThisFrame && !BindEscapeJustUsed) PanelOpen = false;
+                if (Cfg.ShotOn.Value && KeyHit(Cfg.KbShot.Value)) Screenshot();
             }
 
             if (Cfg.LimitOn.Value)

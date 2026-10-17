@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.3
+- **Every hotkey can be changed.** Click the key box on a mod's page and press the new key (Esc cancels, Delete unbinds, RESET restores the default).
+  Covers the menu key, screenshot, Aim Trainer, Session Stats overlay, Build Trainer, Freecam (toggle and teammate keys), Clip Maker (save, record, leave viewer),
+  Crosshair Profiles, all six Chat Macros and the five Pause Helper shortcuts.
+- **Versions are fix counts.** A mod's patch number is how many fixes it has had (Clip Maker v1.0.10, Damage Numbers v1.0.3, ...). The page shows an "N FIXES" tag and
+  hovering the title lists what changed.
+- **Custom icons for every mod**, drawn in code and tinted per mod, so there are no image files to ship.
+- **Aim Trainer v1.1:** six drills (Gridshot, Flick, Moving, Tracking, Head level, Reaction), a 3-minute warm-up routine, combos and hit sounds,
+  a results card with coaching tips (including where your misses land), best scores per minute and a saved run history.
+- **New mods:** Team Panel (your teammates' health, weapon, distance and a direction arrow, your team only) and Combat Log (damage taken, dealt, healing and fight summaries).
+- The NEW tab now holds only the latest additions.
+- Footer shows the current menu and screenshot keys, plus a Menu key button.
+
 ## 1.0.2
 - **New menu layout.** Four tabs: Installed, Featured (yellow, popular picks only), New (just added, tagged NEW) and Download (the whole list with search).
   Joke mods get a laughing face next to their name. Rows and detail pages were polished and long descriptions now wrap.

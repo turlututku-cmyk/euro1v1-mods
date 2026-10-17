@@ -55,7 +55,8 @@ namespace Euro3v3.ModsMenu
         {
             _rowH = 30f;
             EnableRow(Cfg.SsOn);
-            Tog("On-screen leaderboard (F3)", Cfg.SsOverlay);
+            Tog("On-screen leaderboard", Cfg.SsOverlay);
+            KeyRow("Overlay key", Cfg.KbSession, "F3");
             Tog("Update only at the end of each round", Cfg.SsRoundEnd);
             Tog("Pop up the leaderboard after each round", Cfg.SsPopup);
             var c = Ctl("Position");
@@ -79,7 +80,7 @@ namespace Euro3v3.ModsMenu
             float[] hx = { 0f, 0.46f, 0.55f, 0.64f, 0.74f, 0.88f };
             for (int i = 0; i < hdr.Length; i++) G.Label(new Rect(_rx + _rw * hx[i], _py, _rw * 0.12f, 20), hdr[i], 11, G.Dim, i == 0 ? TextAnchor.MiddleLeft : TextAnchor.MiddleRight);
             _py += 22;
-            var top = Features.Leaderboard(7);
+            var top = Features.Leaderboard(5);
             if (top.Count == 0) G.Label(new Rect(_rx, _py, _rw, 22), "Nothing yet.", 13, G.Dim);
             for (int i = 0; i < top.Count; i++)
             {
@@ -95,21 +96,6 @@ namespace Euro3v3.ModsMenu
             _rowH = 36f;
         }
 
-        // ---------- Aim Trainer ----------
-        static void AimPane()
-        {
-            EnableRow(Cfg.AimOn);
-            var m = Ctl("Mode");
-            Cfg.AimMode.Value = G.Segmented(m, Features.AimModes, Cfg.AimMode.Value);
-            Sld("Duration (s)", Cfg.AimTime, 15f, 120f, "0");
-            Sld("Target size (m)", Cfg.AimSize, 0.25f, 1.5f, "0.00");
-            var b = Ctl("", 36);
-            if (SmallBtn(new Rect(b.x, b.y, 200, 32), Features.AimActive ? "STOP  (F2)" : "START  (F2)", G.Accent)) Features.StartAim();
-            Header("SCORES");
-            G.Label(new Rect(_rx, _py, _rw, 24), "Best Gridshot: " + Cfg.AimBest0.Value + "      Best Flick: " + Cfg.AimBest1.Value, 14, G.Text); _py += 28;
-            if (!string.IsNullOrEmpty(Features.AimResult)) { G.Label(new Rect(_rx, _py, _rw, 24), "Last: " + Features.AimResult, 13, G.Dim); _py += 28; }
-            Note("Practice only. Start a practice match (Play > VS Bots), press F2, and shoot the glowing targets. Gridshot keeps 3 targets up; Flick shows one for a moment. It never runs with other players in the match.", 70);
-        }
     }
 }
 

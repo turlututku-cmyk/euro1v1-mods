@@ -52,6 +52,7 @@ namespace Euro3v3.ModsMenu
             public ConfigEntry<bool> On;
             public int Pane = -1; // index into the pane switch, -1 = external plugin
             public string Guid;
+            public string[] Fixes = new string[0];
         }
 
         static readonly System.Collections.Generic.List<ModInfo> _mods = new System.Collections.Generic.List<ModInfo>();
@@ -63,7 +64,7 @@ namespace Euro3v3.ModsMenu
         static bool _built;
 
         // Called right after startup so mods that are not installed are switched off before the menu is ever opened.
-        public static void DebugSetTab(int t) { _tab = t; _view = -1; _page = 0; }
+        public static void DebugSetTab(int t) { _tab = t; _view = -1; _page = 0; _iconSheet = false; }
         public static void DebugOpenMod(string name)
         {
             if (!_built) Build();
@@ -132,21 +133,23 @@ namespace Euro3v3.ModsMenu
             Add("FPS Graph", "Live frame-time graph to spot stutter.", "G", new Color(0.3f, 0.95f, 0.5f), false, Cfg.GraphOn, 21, "2026-10-17");
             Add("Notes", "Pin your own reminders on screen.", "N", new Color(0.35f, 0.7f, 1f), false, Cfg.NotesOn, 22, "2026-10-17");
             Add("Settings Backup", "Back up and restore all your Mods menu settings.", "B", new Color(0.7f, 0.5f, 1f), false, Cfg.BackupOn, 23, "2026-10-17");
-            Add("Kill Messages", "Kill feed for you: You killed X, You assisted Y for X, You were pumped, sniped or shot by Z.", "K", new Color(1f, 0.4f, 0.4f), false, Cfg.KmOn, 24, "2026-10-17", isNew: true);
-            Add("Announcer", "Double, triple and quad kills, sprees and headshots with big text and a stinger sound.", "A", new Color(1f, 0.75f, 0.15f), false, Cfg.AnnOn, 25, "2026-10-17", isNew: true, joke: true);
-            Add("Kill Confetti", "A burst of confetti every time you get a kill.", "C", new Color(1f, 0.4f, 0.8f), false, Cfg.ConfOn, 26, "2026-10-17", isNew: true, joke: true);
-            Add("Session Stats", "Most-kills leaderboard, K/D, assists, damage and streaks for the session.", "S", new Color(0.35f, 0.7f, 1f), false, Cfg.SsOn, 27, "2026-10-17", isNew: true);
-            Add("Aim Trainer", "Practice targets in a bot match: Gridshot and Flick with scores and reaction time.", "T", new Color(0.3f, 0.95f, 0.95f), false, Cfg.AimOn, 28, "2026-10-17", isNew: true);
-            Add("Low Health Warning", "Pulsing red screen edges, a heartbeat and a warning text when your health is low.", "H", new Color(1f, 0.3f, 0.3f), false, Cfg.LhOn, 29, "2026-10-17", isNew: true);
-            Add("Death Taunts", "A big joke line on your screen whenever you die: cheeky, wholesome or roast.", "D", new Color(1f, 0.55f, 0.2f), false, Cfg.DtOn, 30, "2026-10-17", isNew: true, joke: true);
-            Add("Sad Trombone", "Miss five shots in a row and a sad trombone plays.", "T", new Color(0.6f, 0.7f, 1f), false, Cfg.StOn, 31, "2026-10-17", isNew: true, joke: true);
-            Add("Scoreboard Screenshot", "When a match ends, shows a result card and saves a PNG of the final scoreboard.", "S", new Color(0.3f, 0.9f, 0.8f), false, Cfg.SbOn, 32, "2026-10-17", isNew: true);
-            Add("Chat Macros", "Alt + number sends a quick chat message you set up, like gg or need help.", "C", new Color(0.35f, 0.7f, 1f), false, Cfg.CmOn, 33, "2026-10-17", isNew: true);
-            Add("Performance Coach", "Turns your own stats into tips after every round and match. Live accuracy strip.", "P", new Color(0.3f, 0.95f, 0.5f), false, Cfg.CoachOn, 34, "2026-10-17", isNew: true);
-            Add("Chat Filter", "Hides spam, swearing and players you block in the game chat.", "F", new Color(1f, 0.5f, 0.35f), false, Cfg.CfOn, 35, "2026-10-17", isNew: true);
-            Add("Build Trainer", "Timed building drills (walls, floors, stairs) in a bot match with best scores.", "B", new Color(1f, 0.7f, 0.2f), false, Cfg.BtOn, 36, "2026-10-17", isNew: true);
-            Add("Practice Launcher", "One click starts a bot match: Easy, Normal, Hard or Expert. No menu hunting.", "P", new Color(0.4f, 0.75f, 1f), false, Cfg.PlOn, 37, "2026-10-17", isNew: true);
-            Add("Match Found Alert", "Chime and taskbar flash when your queue pops while you are alt-tabbed. Queue timer.", "M", new Color(0.35f, 0.9f, 0.7f), false, Cfg.MaOn, 38, "2026-10-17", isNew: true);
+            Add("Kill Messages", "Kill feed for you: You killed X, You assisted Y for X, You were pumped, sniped or shot by Z.", "K", new Color(1f, 0.4f, 0.4f), false, Cfg.KmOn, 24, "2026-10-17");
+            Add("Announcer", "Double, triple and quad kills, sprees and headshots with big text and a stinger sound.", "A", new Color(1f, 0.75f, 0.15f), false, Cfg.AnnOn, 25, "2026-10-17", joke: true);
+            Add("Kill Confetti", "A burst of confetti every time you get a kill.", "C", new Color(1f, 0.4f, 0.8f), false, Cfg.ConfOn, 26, "2026-10-17", joke: true);
+            Add("Session Stats", "Most-kills leaderboard, K/D, assists, damage and streaks for the session.", "S", new Color(0.35f, 0.7f, 1f), false, Cfg.SsOn, 27, "2026-10-17");
+            Add("Aim Trainer", "Six aim drills and a warm-up routine, with scores, tips and your progress over time.", "T", new Color(0.3f, 0.95f, 0.95f), false, Cfg.AimOn, 28, "2026-10-17", "v1.1.0");
+            Add("Low Health Warning", "Pulsing red screen edges, a heartbeat and a warning text when your health is low.", "H", new Color(1f, 0.3f, 0.3f), false, Cfg.LhOn, 29, "2026-10-17");
+            Add("Death Taunts", "A big joke line on your screen whenever you die: cheeky, wholesome or roast.", "D", new Color(1f, 0.55f, 0.2f), false, Cfg.DtOn, 30, "2026-10-17", joke: true);
+            Add("Sad Trombone", "Miss five shots in a row and a sad trombone plays.", "T", new Color(0.6f, 0.7f, 1f), false, Cfg.StOn, 31, "2026-10-17", joke: true);
+            Add("Scoreboard Screenshot", "When a match ends, shows a result card and saves a PNG of the final scoreboard.", "S", new Color(0.3f, 0.9f, 0.8f), false, Cfg.SbOn, 32, "2026-10-17");
+            Add("Chat Macros", "Alt + number sends a quick chat message you set up, like gg or need help.", "C", new Color(0.35f, 0.7f, 1f), false, Cfg.CmOn, 33, "2026-10-17");
+            Add("Performance Coach", "Turns your own stats into tips after every round and match. Live accuracy strip.", "P", new Color(0.3f, 0.95f, 0.5f), false, Cfg.CoachOn, 34, "2026-10-17");
+            Add("Chat Filter", "Hides spam, swearing and players you block in the game chat.", "F", new Color(1f, 0.5f, 0.35f), false, Cfg.CfOn, 35, "2026-10-17");
+            Add("Build Trainer", "Timed building drills (walls, floors, stairs) in a bot match with best scores.", "B", new Color(1f, 0.7f, 0.2f), false, Cfg.BtOn, 36, "2026-10-17");
+            Add("Practice Launcher", "One click starts a bot match: Easy, Normal, Hard or Expert. No menu hunting.", "P", new Color(0.4f, 0.75f, 1f), false, Cfg.PlOn, 37, "2026-10-17");
+            Add("Match Found Alert", "Chime and taskbar flash when your queue pops while you are alt-tabbed. Queue timer.", "M", new Color(0.35f, 0.9f, 0.7f), false, Cfg.MaOn, 38, "2026-10-17");
+            Add("Team Panel", "Your teammates' health, weapon, distance and a direction arrow. Your team only.", "T", new Color(0.35f, 0.9f, 0.55f), false, Cfg.TpOn, 39, "2026-10-17", isNew: true);
+            Add("Combat Log", "Live feed of damage you take and deal, healing, and a summary when a fight ends.", "C", new Color(1f, 0.45f, 0.4f), false, Cfg.ClOn, 40, "2026-10-17", isNew: true);
             _inst.Clear();
             foreach (var n in Cfg.Installed.Value.Split(new[] { (char)124 }, StringSplitOptions.RemoveEmptyEntries)) _inst.Add(n);
             foreach (var old in new[] { "Screen Vignette", "Neon Border", "Cursor Trail", "Particles", "UI Theme" })
@@ -165,6 +168,7 @@ namespace Euro3v3.ModsMenu
                 }
             }
             catch { }
+            ApplyFixLogs();
             _built = true;
         }
 
@@ -246,16 +250,21 @@ namespace Euro3v3.ModsMenu
                 G.Fill(r, sel ? (goldTab ? new Color(0.36f, 0.29f, 0.04f, 1f) : GreenDark) : (G.Hover(r) ? G.RowHover : G.Row));
                 G.Fill(new Rect(r.x, r.yMax - 3, r.width, 3), sel ? (goldTab ? gold : G.Accent) : (goldTab ? new Color(gold.r, gold.g, gold.b, 0.35f) : new Color(0, 0, 0, 0.25f)));
                 G.Label(r, tabs[i], 14, sel ? G.Text : (goldTab ? gold : G.Dim), TextAnchor.MiddleCenter, true);
-                if (G.Click(r)) { _tab = i; _view = -1; _page = 0; }
+                if (G.Click(r)) { _tab = i; _view = -1; _page = 0; _iconSheet = false; }
             }
 
             if (_view < 0) DrawList(); else DrawDetail();
+            if (_view >= 0) DrawFixPopup();
 
             // footer
             G.Fill(new Rect(0, H - FootH, W, FootH), G.Panel);
             G.Fill(new Rect(0, H - FootH, W, 1), Border);
-            G.Label(new Rect(16, H - FootH, W - 32, FootH),
-                "F8  open/close      F12  screenshot      settings: BepInEx/config/local.euro3v3.modsmenu.cfg", 12, G.Dim);
+            string hint = Features.BindLabel(Cfg.KbMenu.Value) + " open/close";
+            if (Cfg.ShotOn.Value) hint += "     " + Features.BindLabel(Cfg.KbShot.Value) + " screenshot";
+            G.Label(new Rect(16, H - FootH, 300, FootH), hint, 12, G.Dim);
+            G.Label(new Rect(330, H - FootH, 330, FootH), "settings: BepInEx/config/local.euro3v3.modsmenu.cfg", 12, G.Dim);
+            G.Label(new Rect(W - 300, H - FootH, 100, FootH), "Menu key", 12, G.Dim, TextAnchor.MiddleRight);
+            KeyButton(new Rect(W - 192, H - FootH + 4, 176, FootH - 8), Cfg.KbMenu, "F8");
 
             GUI.matrix = Matrix4x4.identity;
             if (G.Released)
@@ -266,6 +275,7 @@ namespace Euro3v3.ModsMenu
 
         static void DrawList()
         {
+            if (_iconSheet) { DrawIconSheet(); return; }
             var list = Filtered();
             const float rowH = 54f, gap = 4f, top = 132f;
             int pageSize = Mathf.Max(1, (int)((H - FootH - 56f - top) / (rowH + gap)));
@@ -315,7 +325,7 @@ namespace Euro3v3.ModsMenu
                 // icon tile
                 var ic = new Rect(r.x + 14, r.y + 7, 40, 40);
                 G.Fill(ic, new Color(m.Tint.r * 0.22f, m.Tint.g * 0.22f, m.Tint.b * 0.22f, 1f));
-                G.Label(ic, m.Glyph, 22, m.Tint, TextAnchor.MiddleCenter, true);
+                ModIcon(ic, m);
 
                 // name, version chip, description
                 float nameW = MeasureWidth(m.Name, 17);
@@ -387,9 +397,11 @@ namespace Euro3v3.ModsMenu
             var ic = new Rect(_rx, _py, 56, 56);
             G.Fill(ic, new Color(m.Tint.r * 0.25f, m.Tint.g * 0.25f, m.Tint.b * 0.25f, 1f));
             G.Fill(new Rect(ic.x, ic.y, ic.width, 2), m.Tint);
-            G.Label(ic, m.Glyph, 30, m.Tint, TextAnchor.MiddleCenter, true);
+            ModIcon(ic, m);
             G.Label(new Rect(_rx + 70, _py, 500, 32), m.Name + "  " + m.Version, 24, G.Text, TextAnchor.MiddleLeft, true);
             if (m.Joke) G.Laugh(new Rect(_rx + 80 + MeasureWidth(m.Name + "  " + m.Version, 24), _py + 5, 24, 24));
+            if (m.Fixes != null && m.Fixes.Length > 0)
+                Chip(new Rect(_rx + 70 + MeasureWidth(m.Name + "  " + m.Version, 24) + (m.Joke ? 36f : 6f), _py + 7, 74, 20), m.Fixes.Length + (m.Fixes.Length == 1 ? " FIX" : " FIXES"), new Color(0.04f, 0.09f, 0.14f), new Color(0.45f, 0.75f, 1f));
             G.Label(new Rect(_rx + 70, _py + 31, 400, 40), m.Author + "  -  " + m.Desc, 12, G.Dim, TextAnchor.UpperLeft, false, true);
             if (m.On != null)
             {
@@ -466,6 +478,8 @@ namespace Euro3v3.ModsMenu
                 case 36: BtPane(); break;
                 case 37: PlPane(); break;
                 case 38: MaPane(); break;
+                case 39: TpPane(); break;
+                case 40: ClPane(); break;
             }
         }
 
@@ -693,7 +707,8 @@ namespace Euro3v3.ModsMenu
         static void Shot()
         {
             EnableRow(Cfg.ShotOn);
-            Note("Press F12 in game to save a PNG of the screen to Mods\\Screenshots. The game's own UI is included.");
+            KeyRow("Screenshot key", Cfg.KbShot, "F12");
+            Note("Press the screenshot key in game to save a PNG of the screen to Mods\\Screenshots. The game's own UI is included.");
             var r = Ctl("", 40);
             if (G.Button(new Rect(r.x, r.y, 220, 34), "TAKE SCREENSHOT NOW")) { Features.PanelOpen = false; Features.Screenshot(); }
         }

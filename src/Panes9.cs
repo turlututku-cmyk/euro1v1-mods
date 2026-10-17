@@ -46,14 +46,15 @@ namespace Euro3v3.ModsMenu
             var m = Ctl("Drill");
             Cfg.BtMode.Value = G.Segmented(m, Features.BtModes, Cfg.BtMode.Value);
             Sld("Time (s)", Cfg.BtTime, 10f, 120f, "0");
+            KeyRow("Start / stop key", Cfg.KbBuild, "F4");
             var b = Ctl("", 36);
-            if (SmallBtn(new Rect(b.x, b.y, 200, 32), Features.BtActive ? "STOP  (F4)" : "START  (F4)", G.Accent)) Features.StartBuildTrainer();
+            if (SmallBtn(new Rect(b.x, b.y, 200, 32), Features.BtActive ? "STOP  (" + Features.BindLabel(Cfg.KbBuild.Value) + ")" : "START  (" + Features.BindLabel(Cfg.KbBuild.Value) + ")", G.Accent)) Features.StartBuildTrainer();
             Header("BEST SCORES");
             string line = "";
             for (int i = 0; i < 4; i++) line += Features.BtModes[i] + " " + Cfg.BtBest[i].Value + (i < 3 ? "      " : "");
             G.Label(new Rect(_rx, _py, _rw, 24), line, 14, G.Text); _py += 28;
             if (!string.IsNullOrEmpty(Features.BtResult)) { G.Label(new Rect(_rx, _py, _rw, 24), "Last: " + Features.BtResult, 13, G.Dim); _py += 28; }
-            Note("Practice only. Start a bot match (Practice Launcher or Play > VS Bots), press F4 and build as many parts as you can before the timer ends. Only parts that appear during the drill count. It never runs with other players in the match.", 70);
+            Note("Practice only. Start a bot match (Practice Launcher or Play > VS Bots), press your start key and build as many parts as you can before the timer ends. Only parts that appear during the drill count. It never runs with other players in the match.", 70);
         }
 
         // ---------- Chat Filter ----------

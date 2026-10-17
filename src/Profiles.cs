@@ -123,7 +123,7 @@ namespace Euro3v3.ModsMenu
         {
             if (!Cfg.ProfOn.Value) return;
             var kb = Keyboard.current;
-            if (kb != null && kb.f9Key.wasPressedThisFrame) Profiles.Next();
+            if (KeyHit(Cfg.KbProfile.Value)) Profiles.Next();
         }
     }
 }

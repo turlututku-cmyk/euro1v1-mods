@@ -145,9 +145,9 @@ namespace Euro3v3.ModsMenu
         static void UpdateClipRecorder()
         {
             var kb = Keyboard.current;
-            if (kb != null && Cfg.ClipOn.Value && kb.f7Key.wasPressedThisFrame)
+            if (Cfg.ClipOn.Value && (KeyHit(Cfg.KbClipRec.Value) || KeyHit(Cfg.KbClipSave.Value)))
             {
-                if (kb.leftShiftKey.isPressed || kb.rightShiftKey.isPressed) ToggleManualRecord();
+                if (KeyHit(Cfg.KbClipRec.Value)) ToggleManualRecord();
                 else SaveClip(null);
             }
 

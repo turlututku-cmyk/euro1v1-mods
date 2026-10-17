@@ -67,7 +67,7 @@ namespace Euro3v3.ModsMenu
         {
             if (!Cfg.BtOn.Value) { if (BtActive) StopBuildTrainer(false); return; }
             var kb = Keyboard.current;
-            if (kb != null && kb.f4Key.wasPressedThisFrame && !PanelOpen) StartBuildTrainer();
+            if (KeyHit(Cfg.KbBuild.Value) && !PanelOpen) StartBuildTrainer();
             if (!BtActive) return;
 
             float now = Time.unscaledTime;

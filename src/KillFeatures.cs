@@ -196,7 +196,7 @@ namespace Euro3v3.ModsMenu
         static void UpdateSessionKeys()
         {
             var kb = Keyboard.current;
-            if (kb != null && Cfg.SsOn.Value && kb.f3Key.wasPressedThisFrame) Cfg.SsOverlay.Value = !Cfg.SsOverlay.Value;
+            if (Cfg.SsOn.Value && KeyHit(Cfg.KbSession.Value)) Cfg.SsOverlay.Value = !Cfg.SsOverlay.Value;
         }
 
         public static SessRow LocalRow() => LbSource().FirstOrDefault(r => r.IsLocal);

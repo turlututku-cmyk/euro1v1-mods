@@ -47,15 +47,14 @@ namespace Euro3v3.ModsMenu
         static readonly string[] _cmBox = new string[6];
         static void CmPane()
         {
+            _rowH = 32f;
             EnableRow(Cfg.CmOn);
-            var m = Ctl("Hold key");
-            Cfg.CmMod.Value = G.Segmented(m, Features.CmMods, Cfg.CmMod.Value);
             Sld("Cooldown (s)", Cfg.CmCooldown, 1f, 10f, "0.0");
-            Header("MESSAGES");
-            string modName = Features.CmMods[Mathf.Clamp(Cfg.CmMod.Value, 0, 2)];
+            Header("KEY AND MESSAGE  (click a key box to change its keybind)");
             for (int i = 0; i < 6; i++)
             {
-                var r = Ctl(modName + " + " + (i + 1));
+                var r = Ctl("");
+                KeyButton(new Rect(_rx, r.y, 190, r.height), Cfg.CmKeys[i], "Alt+Digit" + (i + 1));
                 var box = new Rect(r.x, r.y, r.width - 90, r.height);
                 G.Fill(box, G.Panel);
                 Outline(box, Border);
@@ -65,7 +64,8 @@ namespace Euro3v3.ModsMenu
                 int idx = i;
                 if (SmallBtn(new Rect(box.xMax + 8, box.y, 80, box.height), "SEND")) Features.CmSend(idx);
             }
-            Note("Hold the key and press 1 to 6 to send that message to the game chat as you. Keep it short. The cooldown stops accidental spam. If the game also switches weapon on the number, pick Ctrl or Shift instead of Alt.", 44);
+            Note("Press a macro's key in game to send its message to the game chat as you. Keep it short. The cooldown stops accidental spam. If the game also uses that key (for example Alt+number switching weapons), pick another key or a Ctrl / Shift combo. Esc cancels a rebind, Delete unbinds.", 60);
+            _rowH = 36f;
         }
     }
 }

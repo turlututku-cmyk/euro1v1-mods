@@ -1,3 +1,4 @@
+using BepInEx.Configuration;
 using UnityEngine;
 
 namespace Euro3v3.ModsMenu
@@ -26,16 +27,26 @@ namespace Euro3v3.ModsMenu
             G.Label(new Rect(st.x + 12, st.y, st.width - 24, st.height), status, 13, Features.Recording ? G.Accent : G.Dim, TextAnchor.MiddleLeft, true);
             _py += 34;
 
-            string recLabel = Features.ManualRec ? "STOP & SAVE  " + ((int)(Features.ManualElapsed / 60f)).ToString("00") + ":" + ((int)(Features.ManualElapsed % 60f)).ToString("00") : "RECORD (Shift+F7)";
+            string recLabel = Features.ManualRec ? "STOP & SAVE  " + ((int)(Features.ManualElapsed / 60f)).ToString("00") + ":" + ((int)(Features.ManualElapsed % 60f)).ToString("00") : "RECORD (" + Features.BindLabel(Cfg.KbClipRec.Value) + ")";
             if (SmallBtn(new Rect(_rx, _py, 180, 30), recLabel, new Color(1f, 0.25f, 0.25f))) Features.ToggleManualRecord();
-            if (SmallBtn(new Rect(_rx + 188, _py, 170, 30), "SAVE LAST (F7)", G.Accent)) Features.SaveClip(null);
+            if (SmallBtn(new Rect(_rx + 188, _py, 170, 30), "SAVE LAST (" + Features.BindLabel(Cfg.KbClipSave.Value) + ")", G.Accent)) Features.SaveClip(null);
             if (SmallBtn(new Rect(_rx + 366, _py, 120, 30), "OPEN FOLDER")) OpenFolder(Features.ClipsDir);
             if (SmallBtn(new Rect(_rx + 494, _py, 80, 30), "RESCAN")) Features.ScanClips();
             if (SmallBtn(new Rect(_rx + 582, _py, 110, 30), "VIDEOS")) OpenFolder(Features.VideosDir);
             _py += 36;
 
+            string[] kcap = { "Save last clip", "Record clip", "Leave the viewer" };
+            ConfigEntry<string>[] kent = { Cfg.KbClipSave, Cfg.KbClipRec, Cfg.KbViewerExit };
+            string[] kdef = { "F7", "Shift+F7", "Backspace" };
+            for (int i = 0; i < 3; i++)
+            {
+                float kx = _rx + i * 232f;
+                G.Label(new Rect(kx, _py, 220, 17), kcap[i] + " key", 11, G.Dim);
+                KeyButton(new Rect(kx, _py + 15f, 220, 26), kent[i], kdef[i]);
+            }
+            _py += 46f;
             Header("SAVED CLIPS  (" + Features.Clips.Count + ")   view them inside the same map");
-            const int visible = 4;
+            const int visible = 3;
             _clipOff = Mathf.Clamp(_clipOff, 0, Mathf.Max(0, Features.Clips.Count - visible));
             if (Features.Clips.Count == 0)
                 G.Label(new Rect(_rx, _py, _rw, 40), "No clips yet. During a match press F7 to save the last " + Mathf.RoundToInt(Cfg.ClipSeconds.Value) + " seconds.", 13, G.Dim, TextAnchor.UpperLeft, false, true);

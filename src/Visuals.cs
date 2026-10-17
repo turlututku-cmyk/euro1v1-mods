@@ -62,6 +62,8 @@ namespace Euro3v3.ModsMenu
             UpdateMatchAlert();
             UpdatePractice();
             UpdateBuildTrainer();
+            UpdateTeamPanel();
+            UpdateCombatLog();
             UpdateAim();
             UpdateHealthLabel();
             UpdateFreecam();
@@ -143,6 +145,8 @@ namespace Euro3v3.ModsMenu
             DrawCoach();
             DrawQueueTimer();
             DrawBuildTrainer();
+            DrawTeamPanel();
+            DrawCombatLog();
             DrawRecIndicator();
 
             // ---- vignette ----

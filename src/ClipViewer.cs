@@ -500,7 +500,7 @@ namespace Euro3v3.ModsMenu
 
             if (kb != null)
             {
-                if (kb.backspaceKey.wasPressedThisFrame) { if (Rendering) { CancelRender(true); Toast("Rendering cancelled"); } else StopViewer(); return; }
+                if (KeyHit(Cfg.KbViewerExit.Value)) { if (Rendering) { CancelRender(true); Toast("Rendering cancelled"); } else StopViewer(); return; }
                 if (kb.escapeKey.wasPressedThisFrame) { _closePauseUntil = Time.unscaledTime + 1.2f; if (Rendering) CancelRender(true); StopViewer(); return; }
                 if (kb.tabKey.wasPressedThisFrame) _vUi = !_vUi;
                 if (kb.enterKey.wasPressedThisFrame || kb.pKey.wasPressedThisFrame) _vPlaying = !_vPlaying;

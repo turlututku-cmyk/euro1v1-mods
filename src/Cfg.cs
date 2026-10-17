@@ -24,6 +24,15 @@ namespace Euro3v3.ModsMenu
         public static ConfigEntry<float> DtSize, StMisses, StVol, SbDelay, CmCooldown;
         public static ConfigEntry<string>[] CmMsgs = new ConfigEntry<string>[6];
         public static ConfigEntry<bool> CoachOn, CoachRound, CoachMatch, CoachLive;
+        public static ConfigEntry<bool> AimSound, AimCard;
+        public static ConfigEntry<string> KbMenu, KbShot, KbAim, KbSession, KbBuild, KbFreecam, KbFcNext, KbFcPrev, KbClipSave, KbClipRec, KbProfile, KbViewerExit;
+        public static ConfigEntry<string>[] CmKeys = new ConfigEntry<string>[6];
+        public static ConfigEntry<string>[] PhKeys = new ConfigEntry<string>[5];
+        public static ConfigEntry<bool> TpOn, TpDist, TpDead, ClOn, ClDealt, ClSummary;
+        public static ConfigEntry<int> TpCorner, ClCorner;
+        public static ConfigEntry<float> ClTime;
+        public static ConfigEntry<int> AimDist;
+        public static ConfigEntry<int>[] AimBests = new ConfigEntry<int>[6];
         public static ConfigEntry<bool> CfOn, CfSpam, CfSwear, CfHide, MaOn, MaSound, MaFlash, MaTimer, PlOn, BtOn;
         public static ConfigEntry<string> CfWords, CfBlock;
         public static ConfigEntry<float> MaVol, BtTime;
@@ -123,6 +132,15 @@ namespace Euro3v3.ModsMenu
             LhOn = B("LowHealth", "Enabled", false); LhPulse = B("LowHealth", "Pulse", true); LhSound = B("LowHealth", "Heartbeat", true); LhText = B("LowHealth", "Text", true);
             LhThreshold = B("LowHealth", "BelowPercent", 30f); LhStrength = B("LowHealth", "Strength", 0.7f); LhVol = B("LowHealth", "Volume", 0.6f);
             AimOn = B("AimTrainer", "Enabled", false); AimMode = B("AimTrainer", "Mode", 0); AimTime = B("AimTrainer", "Seconds", 60f); AimSize = B("AimTrainer", "TargetSize", 0.7f); AimBest0 = B("AimTrainer", "BestGridshot", 0); AimBest1 = B("AimTrainer", "BestFlick", 0);
+            TpOn = B("TeamPanel", "Enabled", false); TpCorner = B("TeamPanel", "Corner", 0); TpDist = B("TeamPanel", "DistanceArrow", true); TpDead = B("TeamPanel", "ShowDead", true);
+            ClOn = B("CombatLog", "Enabled", false); ClCorner = B("CombatLog", "Corner", 3); ClTime = B("CombatLog", "LineSeconds", 4f); ClDealt = B("CombatLog", "ShowDealt", true); ClSummary = B("CombatLog", "FightSummaries", true);
+            AimSound = B("AimTrainer", "HitSounds", true); AimCard = B("AimTrainer", "ResultsCard", true); AimDist = B("AimTrainer", "Distance", 1);
+            AimBests[0] = AimBest0; AimBests[1] = AimBest1;
+            { var an = new[] { "BestMoving", "BestTracking", "BestHeadLevel", "BestReaction" }; for (int i = 0; i < 4; i++) AimBests[i + 2] = B("AimTrainer", an[i], 0); }
+            KbMenu = B("Keys", "Menu", "F8"); KbShot = B("Keys", "Screenshot", "F12"); KbAim = B("Keys", "AimTrainer", "F2"); KbSession = B("Keys", "SessionOverlay", "F3"); KbBuild = B("Keys", "BuildTrainer", "F4");
+            KbFreecam = B("Keys", "Freecam", "F6"); KbFcNext = B("Keys", "FreecamNextTarget", "E"); KbFcPrev = B("Keys", "FreecamPreviousTarget", "Q");
+            KbClipSave = B("Keys", "SaveClip", "F7"); KbClipRec = B("Keys", "RecordClip", "Shift+F7"); KbProfile = B("Keys", "NextCrosshairProfile", "F9"); KbViewerExit = B("Keys", "LeaveClipViewer", "Backspace");
+            { string cmod = CmMod.Value == 1 ? "Ctrl+" : CmMod.Value == 2 ? "Shift+" : "Alt+"; for (int i = 0; i < 6; i++) CmKeys[i] = B("Keys", "ChatMacro" + (i + 1), cmod + "Digit" + (i + 1)); for (int i = 0; i < 5; i++) PhKeys[i] = B("Keys", "PauseShortcut" + (i + 1), "Digit" + (i + 1)); }
             HideOn = B("HideGui", "Enabled", true); HideAds = B("HideGui", "Ads", true); HideNews = B("HideGui", "News", true); HideFeedback = B("HideGui", "FeedbackButton", true); HideVersion = B("HideGui", "VersionText", true);
             HideTasks = B("HideGui", "Tasks", false); HideQuest = B("HideGui", "Quest", false); HideLevel = B("HideGui", "LevelBar", false); HideParty = B("HideGui", "Party", false);
             HideDials = B("HideGui", "CompassAndDials", true); HideAtm = B("HideGui", "AtmInfo", false); HideIngameLevel = B("HideGui", "InGameLevel", false);

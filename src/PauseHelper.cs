@@ -53,19 +53,19 @@ namespace Euro3v3.ModsMenu
 
             var kb = Keyboard.current;
             if (kb == null) return;
-            if (kb.digit1Key.wasPressedThisFrame) ClickPauseButton("resume");
-            else if (kb.digit2Key.wasPressedThisFrame) ClickPauseButton("settings");
-            else if (kb.digit3Key.wasPressedThisFrame) ClickPauseButton("locker");
-            else if (kb.digit4Key.wasPressedThisFrame) ClickPauseButton("edit profile");
-            else if (kb.digit5Key.wasPressedThisFrame) PanelOpen = !PanelOpen;
+            if (KeyHit(Cfg.PhKeys[0].Value)) ClickPauseButton("resume");
+            else if (KeyHit(Cfg.PhKeys[1].Value)) ClickPauseButton("settings");
+            else if (KeyHit(Cfg.PhKeys[2].Value)) ClickPauseButton("locker");
+            else if (KeyHit(Cfg.PhKeys[3].Value)) ClickPauseButton("edit profile");
+            else if (KeyHit(Cfg.PhKeys[4].Value)) PanelOpen = !PanelOpen;
         }
 
         static void DrawPauseHints()
         {
             if (!Cfg.PauseOn.Value || !Cfg.PauseHints.Value || !_pauseVisible) return;
-            string[] keys = { "1", "2", "3", "4", "5" };
+            string[] keys = new string[5]; for (int q = 0; q < 5; q++) keys[q] = BindLabel(Cfg.PhKeys[q].Value);
             string[] names = { "Resume", "Settings", "Locker / Shop", "Edit Profile", "Mods" };
-            const float w = 210f, rowH = 28f;
+            const float w = 250f, rowH = 28f;
             float h = 40f + keys.Length * rowH;
             var r = new Rect(18, Screen.height / 2f - h / 2f, w, h);
             G.Fill(r, new Color(0, 0, 0, 0.7f));
@@ -74,10 +74,10 @@ namespace Euro3v3.ModsMenu
             for (int i = 0; i < keys.Length; i++)
             {
                 var row = new Rect(r.x + 14, r.y + 38 + i * rowH, w - 24, rowH);
-                var kb = new Rect(row.x, row.y + 3, 24, 22);
+                var kb = new Rect(row.x, row.y + 3, 62, 22);
                 G.Fill(kb, G.Row);
                 G.Label(kb, keys[i], 13, G.Text, TextAnchor.MiddleCenter, true);
-                G.Label(new Rect(row.x + 34, row.y, row.width - 34, rowH), names[i], 14, G.Text);
+                G.Label(new Rect(row.x + 72, row.y, row.width - 72, rowH), names[i], 14, G.Text);
             }
         }
     }

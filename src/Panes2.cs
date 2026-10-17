@@ -34,7 +34,8 @@ namespace Euro3v3.ModsMenu
                 if (Profiles.SaveCurrent(_profName)) _profName = "";
             }
 
-            Header("SAVED PROFILES  (F9 = next profile)");
+            KeyRow("Next profile key", Cfg.KbProfile, "F9");
+            Header("SAVED PROFILES");
             if (Profiles.List.Count == 0)
             {
                 G.Label(new Rect(_rx, _py, _rw, 30), "No profiles yet. Set up your crosshair in Crosshair Changer, then save it here.", 13, G.Dim);
@@ -66,18 +67,15 @@ namespace Euro3v3.ModsMenu
         {
             EnableRow(Cfg.PauseOn);
             Tog("Show key hints", Cfg.PauseHints);
-            Header("SHORTCUTS (while the PAUSED screen is showing)");
-            string[] k = { "1", "2", "3", "4", "5" };
+            Header("SHORTCUTS  (click a key to change it)");
             string[] n = { "Resume", "Settings", "Locker / Shop", "Edit Profile", "Open this Mods menu" };
-            for (int i = 0; i < k.Length; i++)
+            for (int i = 0; i < n.Length; i++)
             {
-                var kb = new Rect(_rx, _py, 30, 26);
-                G.Fill(kb, G.Row);
-                G.Label(kb, k[i], 14, G.Text, TextAnchor.MiddleCenter, true);
-                G.Label(new Rect(_rx + 44, _py, _rw - 44, 26), n[i], 14, G.Text);
+                KeyButton(new Rect(_rx, _py, 170, 26), Cfg.PhKeys[i], "Digit" + (i + 1));
+                G.Label(new Rect(_rx + 184, _py, _rw - 184, 26), n[i], 14, G.Text);
                 _py += 32;
             }
-            Note("Disconnect has no shortcut on purpose, so you can't leave a match by accident.");
+            Note("They only react while the PAUSED screen is showing. Disconnect has no shortcut on purpose, so you can't leave a match by accident. Esc cancels a rebind, Delete unbinds.", 44);
         }
 
         // ---------- Menu Music Player ----------
@@ -140,11 +138,14 @@ namespace Euro3v3.ModsMenu
         {
             EnableRow(Cfg.FreeOn);
             Sld("Mouse sensitivity", Cfg.FreeSens, 0.03f, 0.4f, "0.00");
+            KeyRow("Turn on / off", Cfg.KbFreecam, "F6");
+            KeyRow("Next teammate", Cfg.KbFcNext, "E");
+            KeyRow("Previous teammate", Cfg.KbFcPrev, "Q");
             Header("HOW IT WORKS");
             string[] lines =
             {
-                "F6 turns the team cam on and off while in a match.",
-                "Q and E switch between teammates. Scroll zooms (short leash).",
+                "The turn on / off key starts and stops the team cam while in a match.",
+                "The teammate keys switch between teammates. Scroll zooms (short leash).",
                 "It only follows your own team and cannot pass through walls.",
                 "Works when you are dead, or in matches with no other human players.",
                 "Turns itself off if the rules stop being met (for example you respawn in a live match).",

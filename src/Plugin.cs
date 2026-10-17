@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 namespace Euro3v3.ModsMenu
 {
-    [BepInPlugin("local.euro3v3.modsmenu", "Euro3v3 Mods Menu", "1.0.2")]
+    [BepInPlugin("local.euro3v3.modsmenu", "Euro3v3 Mods Menu", "1.0.3")]
     public class Plugin : BasePlugin
     {
         public static Plugin Instance;

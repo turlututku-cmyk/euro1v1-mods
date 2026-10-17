@@ -100,7 +100,7 @@ namespace Euro3v3.ModsMenu
                 return;
             }
             var kb = Keyboard.current;
-            if (kb != null && kb.f6Key.wasPressedThisFrame)
+            if (KeyHit(Cfg.KbFreecam.Value))
             {
                 if (FreeActive) { StopFree(); Toast("Freecam off"); }
                 else if (FcRefresh(out var why)) StartFree();
@@ -120,8 +120,8 @@ namespace Euro3v3.ModsMenu
 
             if (kb != null)
             {
-                if (kb.eKey.wasPressedThisFrame) _fcIdx = (_fcIdx + 1) % _fcTargets.Count;
-                if (kb.qKey.wasPressedThisFrame) _fcIdx = (_fcIdx - 1 + _fcTargets.Count) % _fcTargets.Count;
+                if (KeyHit(Cfg.KbFcNext.Value)) _fcIdx = (_fcIdx + 1) % _fcTargets.Count;
+                if (KeyHit(Cfg.KbFcPrev.Value)) _fcIdx = (_fcIdx - 1 + _fcTargets.Count) % _fcTargets.Count;
             }
             var mouse = Mouse.current;
             if (mouse != null)

@@ -1,7 +1,7 @@
 # Euro Mods Menu
 
 An in-game **Mods menu** for Euro3v3, built as a [BepInEx 6](https://github.com/BepInEx/BepInEx) IL2CPP plugin.
-Open it with **F8** or the **Mods** button that is added to the Play menu and the pause menu.
+Open it with **F8** (or the key you set) or the **Mods** button that is added to the Play menu and the pause menu.
 Every mod is optional: nothing is switched on until you press **GET** on it.
 
 > Unofficial fan project, not affiliated with the game's developers. Everything here is client-side.
@@ -13,32 +13,39 @@ Every mod is optional: nothing is switched on until you press **GET** on it.
 |---|---|
 | **Installed** | The mods you have, each with an on/off switch |
 | **Featured** (yellow) | Popular picks that are worth downloading. Damage Numbers is the first one |
-| **New** | The most recently added mods, tagged NEW. A laughing face marks the joke mods |
+| **New** | Only the very latest additions, tagged NEW. A laughing face marks the joke mods |
 | **Download** | The whole list in one place, with search, A-Z and an "on" filter |
+
+Every mod has its own picture, and its **version is its fix count**: `v1.0.4` means four fixes. Hover the title on a mod's page to see what changed.
 
 ## Mods
 
 | Area | Mods |
 |---|---|
-| Crosshair | **Crosshair Changer** (6 styles, colors, outline, rainbow), **Crosshair Profiles** (save and switch presets, F9) |
+| Crosshair | **Crosshair Changer** (6 styles, colors, outline, rainbow), **Crosshair Profiles** (save and switch presets) |
 | Overlays | **FPS Counter**, **Clock**, **FPS Graph**, **Match Stats**, **Input Display**, **Notes** |
-| Combat feedback | **Hit Sounds**, **Damage Numbers** (one number per shot, healing +N), **Kill Messages** ("You killed X", "You assisted Y for X", "You were sniped by Z"), **Announcer** (double/triple kills, sprees), **Kill Confetti**, **Low Health Warning** (pulsing red edges, heartbeat) |
-| Get better | **Performance Coach** (tips after every round and match from your own stats), **Aim Trainer** (F2), **Build Trainer** (F4), **Practice Launcher** (one-click bot matches), **Session Stats** (leaderboard that updates at the end of each round, F3) |
-| Match tools | **Scoreboard Screenshot** (result card and PNG when a match ends), **Chat Macros** (Alt + 1-6 sends quick messages), **Chat Filter** (spam, swearing and blocked players), **Match Found Alert** (chime and taskbar flash, queue timer) |
+| Combat feedback | **Hit Sounds**, **Damage Numbers** (one number per shot, healing +N), **Kill Messages** ("You killed X", "You assisted Y for X", "You were sniped by Z"), **Announcer** (double/triple kills, sprees), **Kill Confetti**, **Low Health Warning** (pulsing red edges, heartbeat), **Combat Log** (damage taken and dealt, healing, fight summaries) |
+| Get better | **Performance Coach** (tips after every round and match from your own stats), **Aim Trainer** (six drills, warm-up routine, results and tips), **Build Trainer**, **Practice Launcher** (one-click bot matches), **Session Stats** (leaderboard that updates at the end of each round) |
+| Match tools | **Team Panel** (your teammates' health, weapon, distance and an arrow, your team only), **Scoreboard Screenshot** (result card and PNG when a match ends), **Chat Macros** (quick messages on a key), **Chat Filter** (spam, swearing and blocked players), **Match Found Alert** (chime and taskbar flash, queue timer) |
 | Jokes | **Death Taunts**, **Sad Trombone**, Announcer and Kill Confetti |
 | Visuals | **Better Visuals** (vignette, neon border, particles, cursor trail, UI theme, rainbow guns and text, HUD cleaner, health label), **RTX Mode**, **Letterbox**, **Screen Tint** |
 | Clips | **Clip Maker**: records match movement and build parts, 3D replay viewer inside the real map, timeline, trim, camera path, render to video (AVI) |
 | Camera | **Freecam (Team)**: orbit your teammates only, never leaves your team |
 | Quality of life | **Pause Helper**, **Menu Music Player** (your own mp3/wav/ogg, streamed so it stays light on memory), **FPS Limiter**, **FOV Changer**, **Volume Control**, **Run in Background**, **Screenshot Key**, **Settings Backup** |
 
-Hotkeys: `F8` menu, `F12` screenshot, `F9` next crosshair profile, `F7` save clip, `Shift+F7` record clip, `F6` team camera,
-`F2` Aim Trainer, `F3` session leaderboard, `F4` Build Trainer, `Alt+1..6` Chat Macros (the modifier key is configurable), `Backspace` leave the clip viewer.
+### Keys
+
+**Every hotkey can be changed.** Open the mod's page, click the key box, press the new key. `Esc` cancels, `Delete` unbinds and `RESET` restores the default.
+The menu key is at the bottom right of the menu. Combos such as `Shift + F7` work.
+
+Defaults: `F8` menu, `F12` screenshot, `F2` Aim Trainer, `F3` session leaderboard, `F4` Build Trainer, `F6` team camera, `F7` save clip,
+`Shift+F7` record clip, `F9` next crosshair profile, `Alt+1..6` Chat Macros, `Backspace` leave the clip viewer.
 
 ### Fair-play rules built in
 - Freecam only follows living teammates and cannot pass through walls. It refuses to start while you are alive against other players.
 - The clip viewer refuses to open while you are alive in a live match with real players. If you are dead it shows your own team only.
 - Aim Trainer, Build Trainer and Practice Launcher refuse to run in a live match with other players.
-- The Coach, kill tracking and round tracking use only your own stats and what the game already shows on its scoreboard.
+- Team Panel shows only your own team. The Coach, Combat Log, kill tracking and round tracking use only your own stats and what the game already shows on its scoreboard.
 - No wallhacks, aim assist or anything that reveals hidden information.
 
 ## Install (players)
@@ -63,7 +70,7 @@ The plugin DLL (plus `NLayer.dll` and `NVorbis.dll`) is written to `BepInEx/plug
 
 Layout:
 
-- `src/` the plugin (`Cfg.cs` settings, `Window.cs` and `Panes*.cs` the menu, one file per feature)
+- `src/` the plugin (`Cfg.cs` settings, `Window.cs` and `Panes*.cs` the menu, `ModIcons.cs` the drawn icons, `Keybinds.cs` the rebindable keys, one file per feature)
 - `missions/bot_mission_clipview.json` a tiny private mission the clip viewer starts to load the map. Copy it to `Euro3v3_Data/StreamingAssets/Missions/` (the plugin does this itself)
 - `tools/MakeClipMission/` generates that mission from the game's own `bot_mission_easy.json`
 
@@ -71,7 +78,7 @@ Layout:
 
 Create `BepInEx/debug.trigger` while the game runs and the plugin writes `BepInEx/debug-state.txt` and `debug-shot.png` (state report and a screenshot of the game).
 `BepInEx/debug-types.trigger` lists the members of named game classes into `debug-types.txt` (a line starting with `*` searches type names, `~` searches member names).
-`BepInEx/debug-menu.trigger` opens the Mods menu on a tab (`0`-`3`) or on a mod page (`view:Mod Name`) and saves a screenshot.
+`BepInEx/debug-menu.trigger` opens the Mods menu on a tab (`0`-`3`), on a mod page (`view:Mod Name`) or on a sheet of all icons (`icons`) and saves a screenshot.
 
 ## Credits
 
@@ -87,10 +94,10 @@ MIT, see `LICENSE`. BepInEx and the other libraries keep their own licenses.
 
 BepInEx and everything else is **already inside the zip**, so there is nothing else to install.
 
-[![Download Euro Mods Menu 1.0.2 (with BepInEx)](https://img.shields.io/badge/Download-Euro%20Mods%20Menu%201.0.2%20%C2%B7%20with%20BepInEx-2ea44f?style=for-the-badge&logo=github)](https://github.com/turlututku-cmyk/euro1v1-mods/raw/main/download/Euro3v3_ModsMenu_1.0.2.zip)
+[![Download Euro Mods Menu 1.0.3 (with BepInEx)](https://img.shields.io/badge/Download-Euro%20Mods%20Menu%201.0.3%20%C2%B7%20with%20BepInEx-2ea44f?style=for-the-badge&logo=github)](https://github.com/turlututku-cmyk/euro1v1-mods/raw/main/download/Euro3v3_ModsMenu_1.0.3.zip)
 
-- Version: **1.0.2** (see `CHANGELOG.md`)
-- File: `download/Euro3v3_ModsMenu_1.0.2.zip` (33 MB)
-- SHA-256: `4498c364eb6e8b117d5f9f32bde74fc31ab12c2a25ee8a21a1ffacf3f0db214e`
+- Version: **1.0.3** (see `CHANGELOG.md`)
+- File: `download/Euro3v3_ModsMenu_1.0.3.zip` (33 MB)
+- SHA-256: `b863a50b152d56c1d085fde462b55a688f6fb245ee19f028c4bf7a4c6df15a8a`
 - Extract it into the Euro3v3 game folder, start the game, press **F8** and GET the mods you want.
 - Updating: extract a newer zip over the old one. Your settings are kept.
