@@ -50,6 +50,19 @@ namespace Euro3v3.ModsMenu
             UpdateRtx();
             UpdateHideGui();
             UpdateGraph();
+            UpdateKillTracker();
+            UpdateConfetti();
+            UpdateSessionKeys();
+            UpdateRounds();
+            UpdateLowHealth();
+            UpdateSadTrombone();
+            UpdateScoreboardShot();
+            UpdateChatMacros();
+            UpdateCoach();
+            UpdateMatchAlert();
+            UpdatePractice();
+            UpdateBuildTrainer();
+            UpdateAim();
             UpdateHealthLabel();
             UpdateFreecam();
             UpdateHitSounds();
@@ -118,6 +131,18 @@ namespace Euro3v3.ModsMenu
             DrawMatchStats();
             DrawFpsGraph();
             DrawNotes();
+            DrawConfetti();
+            DrawKillMessages();
+            DrawAnnouncer();
+            DrawSessionOverlay();
+            DrawAim();
+            DrawLowHealth();
+            DrawDeathTaunt();
+            DrawSadTrombone();
+            DrawScoreboardCard();
+            DrawCoach();
+            DrawQueueTimer();
+            DrawBuildTrainer();
             DrawRecIndicator();
 
             // ---- vignette ----

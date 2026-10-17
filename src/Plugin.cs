@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 namespace Euro3v3.ModsMenu
 {
-    [BepInPlugin("local.euro3v3.modsmenu", "Euro3v3 Mods Menu", "1.0.1")]
+    [BepInPlugin("local.euro3v3.modsmenu", "Euro3v3 Mods Menu", "1.0.2")]
     public class Plugin : BasePlugin
     {
         public static Plugin Instance;
@@ -30,6 +30,14 @@ namespace Euro3v3.ModsMenu
                 Log.LogInfo("Hitmarker hook installed");
             }
             catch (Exception e) { Log.LogWarning("Hitmarker hook failed (falling back to polling): " + e.Message); }
+            try
+            {
+                var chatHarmony = new HarmonyLib.Harmony("local.euro3v3.modsmenu.chat");
+                chatHarmony.Patch(HarmonyLib.AccessTools.Method(typeof(ServerMessageHandler), "DisplayChatMessage", new[] { typeof(string) }), prefix: new HarmonyLib.HarmonyMethod(typeof(ChatPatch), nameof(ChatPatch.Prefix)));
+                chatHarmony.Patch(HarmonyLib.AccessTools.Method(typeof(ServerMessageHandler), "DisplayChatMessage", new[] { typeof(string), typeof(ChatColorId) }), prefix: new HarmonyLib.HarmonyMethod(typeof(ChatPatch2), nameof(ChatPatch2.Prefix)));
+                Log.LogInfo("Chat filter hook installed");
+            }
+            catch (Exception e) { Log.LogWarning("Chat filter hook failed: " + e.Message); }
             Log.LogInfo("Mods menu plugin loaded");
         }
     }

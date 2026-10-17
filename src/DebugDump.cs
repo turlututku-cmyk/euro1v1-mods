@@ -32,6 +32,22 @@ namespace Euro3v3.ModsMenu
 
             if (Time.unscaledTime < _nextTriggerCheck) return;
             _nextTriggerCheck = Time.unscaledTime + 1f;
+            var mtrig = Path.Combine(Paths.BepInExRootPath, "debug-menu.trigger");
+            if (File.Exists(mtrig))
+            {
+                int tabIdx = 0; string viewName = null;
+                try
+                {
+                    var txt = File.ReadAllText(mtrig).Trim(); File.Delete(mtrig);
+                    if (txt.StartsWith("view:")) viewName = txt.Substring(5).Trim(); else int.TryParse(txt, out tabIdx);
+                }
+                catch { }
+                PanelOpen = true; Window.DebugSetTab(tabIdx);
+                if (viewName != null) { Window.DebugOpenMod(viewName); _shotSuffix = "-view-" + viewName.Replace(" ", ""); }
+                else _shotSuffix = "-menu" + tabIdx;
+                _shotPending = 4;
+                return;
+            }
             var trig = Path.Combine(Paths.BepInExRootPath, "debug.trigger");
             if (!File.Exists(trig)) return;
             try { File.Delete(trig); } catch { }

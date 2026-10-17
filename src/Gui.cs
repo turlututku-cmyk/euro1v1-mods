@@ -61,6 +61,14 @@ namespace Euro3v3.ModsMenu
             GUI.Label(r, s, _label);
         }
 
+        public static float TextWidth(string s, int size, bool bold = false)
+        {
+            Ensure();
+            _label.fontSize = size; _label.wordWrap = false;
+            _label.fontStyle = bold ? FontStyle.Bold : FontStyle.Normal;
+            return _label.CalcSize(new GUIContent(s)).x;
+        }
+
         static GUIStyle _field;
 
         public static string TextField(string id, Rect r, string v, string placeholder, int maxLen = 64)
@@ -97,6 +105,60 @@ namespace Euro3v3.ModsMenu
             }
             if (Click(r)) { Changed = true; Released = true; return !v; }
             return v;
+        }
+
+        // ---- small laughing face (drawn once into a texture) for the joke mods
+        static Texture2D _laugh;
+
+        public static void Laugh(Rect r)
+        {
+            if (_laugh == null) _laugh = MakeLaugh();
+            if (_laugh != null) GUI.DrawTexture(r, _laugh, ScaleMode.StretchToFill, true);
+        }
+
+        static Texture2D MakeLaugh()
+        {
+            try
+            {
+                const int S = 64;
+                var t = new Texture2D(S, S, TextureFormat.RGBA32, false);
+                var clear = new Color(0, 0, 0, 0);
+                var yellow = new Color(1f, 0.82f, 0.25f, 1f); var edge = new Color(0.85f, 0.6f, 0.1f, 1f);
+                var dark = new Color(0.25f, 0.13f, 0.05f, 1f); var tongue = new Color(1f, 0.42f, 0.45f, 1f); var tear = new Color(0.5f, 0.8f, 1f, 1f);
+                for (int y = 0; y < S; y++)
+                    for (int x = 0; x < S; x++)
+                    {
+                        float dx = x - 31.5f, dy = y - 31.5f, d = Mathf.Sqrt(dx * dx + dy * dy);
+                        Color c = clear;
+                        if (d <= 30f) c = d > 27.5f ? edge : yellow;
+                        if (d <= 30f)
+                        {
+                            foreach (float ex in new[] { -13f, 13f })       // closed, laughing eyes (upward arcs)
+                            {
+                                float ax = dx - ex, ay = dy - 9f, ad = Mathf.Sqrt(ax * ax + ay * ay);
+                                if (ad >= 5f && ad <= 9f && ay > -1f) c = dark;
+                            }
+                            float mx = dx / 18f, my = (dy + 9f) / 14f;       // open grin
+                            if (mx * mx + my * my <= 1f && dy < -2f)
+                            {
+                                c = dark;
+                                float tx = dx / 9f, ty = (dy + 19f) / 5.5f;
+                                if (tx * tx + ty * ty <= 1f) c = tongue;
+                            }
+                        }
+                        foreach (float tx2 in new[] { -27f, 27f })           // tears of joy
+                        {
+                            float qx = dx - tx2, qy = dy - 3f;
+                            if (qx * qx + qy * qy <= 12f) c = tear;
+                        }
+                        t.SetPixel(x, y, c);
+                    }
+                t.Apply();
+                t.filterMode = FilterMode.Bilinear;
+                t.hideFlags = HideFlags.HideAndDontSave;
+                return t;
+            }
+            catch { return null; }
         }
 
         public static bool Hover(Rect r) => r.Contains(Event.current.mousePosition);

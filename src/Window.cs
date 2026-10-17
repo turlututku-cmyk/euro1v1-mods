@@ -47,6 +47,7 @@ namespace Euro3v3.ModsMenu
             public string Name, Version, Author, Desc, Glyph;
             public Color Tint;
             public bool Featured;
+            public bool IsNew, Joke;
             public DateTime Added;
             public ConfigEntry<bool> On;
             public int Pane = -1; // index into the pane switch, -1 = external plugin
@@ -54,7 +55,7 @@ namespace Euro3v3.ModsMenu
         }
 
         static readonly System.Collections.Generic.List<ModInfo> _mods = new System.Collections.Generic.List<ModInfo>();
-        static int _tab;          // 0 installed, 1 featured, 2 download, 3 recent
+        static int _tab;          // 0 installed, 1 featured, 2 new, 3 download (whole list)
         static int _view = -1;    // -1 = list, otherwise index into _mods
         static string _search = "";
         static bool _sortAz, _onlyOn;
@@ -62,6 +63,14 @@ namespace Euro3v3.ModsMenu
         static bool _built;
 
         // Called right after startup so mods that are not installed are switched off before the menu is ever opened.
+        public static void DebugSetTab(int t) { _tab = t; _view = -1; _page = 0; }
+        public static void DebugOpenMod(string name)
+        {
+            if (!_built) Build();
+            int i = _mods.FindIndex(m => m.Name == name);
+            if (i >= 0) { _view = i; _sel = _mods[i].Pane; }
+        }
+
         public static void EnsureBuilt() { if (!_built) Build(); }
         static readonly HashSet<string> _inst = new HashSet<string>();
         static readonly Dictionary<string, float> _installing = new Dictionary<string, float>();
@@ -96,8 +105,8 @@ namespace Euro3v3.ModsMenu
         static void Build()
         {
             _mods.Clear();
-            void Add(string n, string d, string g, Color c, bool feat, ConfigEntry<bool> on, int pane, string added = "2026-10-15", string ver = "v1.0.0") =>
-                _mods.Add(new ModInfo { Name = n, Desc = d, Glyph = g, Tint = c, Featured = feat, On = on, Pane = pane, Version = ver, Author = "Built-in", Added = DateTime.Parse(added, System.Globalization.CultureInfo.InvariantCulture) });
+            void Add(string n, string d, string g, Color c, bool feat, ConfigEntry<bool> on, int pane, string added = "2026-10-15", string ver = "v1.0.0", bool isNew = false, bool joke = false) =>
+                _mods.Add(new ModInfo { Name = n, Desc = d, Glyph = g, Tint = c, Featured = feat, On = on, Pane = pane, Version = ver, Author = "Built-in", IsNew = isNew, Joke = joke, Added = DateTime.Parse(added, System.Globalization.CultureInfo.InvariantCulture) });
 
             Add("Crosshair Changer", "Custom crosshair overlay with six styles, colors and outline.", "+", new Color(0.2f, 1f, 0.3f), false, Cfg.CrossOn, 0);
             Add("FPS Counter", "Live FPS and frame time in any screen corner.", "F", new Color(1f, 0.75f, 0.15f), false, Cfg.FpsOn, 1);
@@ -123,6 +132,21 @@ namespace Euro3v3.ModsMenu
             Add("FPS Graph", "Live frame-time graph to spot stutter.", "G", new Color(0.3f, 0.95f, 0.5f), false, Cfg.GraphOn, 21, "2026-10-17");
             Add("Notes", "Pin your own reminders on screen.", "N", new Color(0.35f, 0.7f, 1f), false, Cfg.NotesOn, 22, "2026-10-17");
             Add("Settings Backup", "Back up and restore all your Mods menu settings.", "B", new Color(0.7f, 0.5f, 1f), false, Cfg.BackupOn, 23, "2026-10-17");
+            Add("Kill Messages", "Kill feed for you: You killed X, You assisted Y for X, You were pumped, sniped or shot by Z.", "K", new Color(1f, 0.4f, 0.4f), false, Cfg.KmOn, 24, "2026-10-17", isNew: true);
+            Add("Announcer", "Double, triple and quad kills, sprees and headshots with big text and a stinger sound.", "A", new Color(1f, 0.75f, 0.15f), false, Cfg.AnnOn, 25, "2026-10-17", isNew: true, joke: true);
+            Add("Kill Confetti", "A burst of confetti every time you get a kill.", "C", new Color(1f, 0.4f, 0.8f), false, Cfg.ConfOn, 26, "2026-10-17", isNew: true, joke: true);
+            Add("Session Stats", "Most-kills leaderboard, K/D, assists, damage and streaks for the session.", "S", new Color(0.35f, 0.7f, 1f), false, Cfg.SsOn, 27, "2026-10-17", isNew: true);
+            Add("Aim Trainer", "Practice targets in a bot match: Gridshot and Flick with scores and reaction time.", "T", new Color(0.3f, 0.95f, 0.95f), false, Cfg.AimOn, 28, "2026-10-17", isNew: true);
+            Add("Low Health Warning", "Pulsing red screen edges, a heartbeat and a warning text when your health is low.", "H", new Color(1f, 0.3f, 0.3f), false, Cfg.LhOn, 29, "2026-10-17", isNew: true);
+            Add("Death Taunts", "A big joke line on your screen whenever you die: cheeky, wholesome or roast.", "D", new Color(1f, 0.55f, 0.2f), false, Cfg.DtOn, 30, "2026-10-17", isNew: true, joke: true);
+            Add("Sad Trombone", "Miss five shots in a row and a sad trombone plays.", "T", new Color(0.6f, 0.7f, 1f), false, Cfg.StOn, 31, "2026-10-17", isNew: true, joke: true);
+            Add("Scoreboard Screenshot", "When a match ends, shows a result card and saves a PNG of the final scoreboard.", "S", new Color(0.3f, 0.9f, 0.8f), false, Cfg.SbOn, 32, "2026-10-17", isNew: true);
+            Add("Chat Macros", "Alt + number sends a quick chat message you set up, like gg or need help.", "C", new Color(0.35f, 0.7f, 1f), false, Cfg.CmOn, 33, "2026-10-17", isNew: true);
+            Add("Performance Coach", "Turns your own stats into tips after every round and match. Live accuracy strip.", "P", new Color(0.3f, 0.95f, 0.5f), false, Cfg.CoachOn, 34, "2026-10-17", isNew: true);
+            Add("Chat Filter", "Hides spam, swearing and players you block in the game chat.", "F", new Color(1f, 0.5f, 0.35f), false, Cfg.CfOn, 35, "2026-10-17", isNew: true);
+            Add("Build Trainer", "Timed building drills (walls, floors, stairs) in a bot match with best scores.", "B", new Color(1f, 0.7f, 0.2f), false, Cfg.BtOn, 36, "2026-10-17", isNew: true);
+            Add("Practice Launcher", "One click starts a bot match: Easy, Normal, Hard or Expert. No menu hunting.", "P", new Color(0.4f, 0.75f, 1f), false, Cfg.PlOn, 37, "2026-10-17", isNew: true);
+            Add("Match Found Alert", "Chime and taskbar flash when your queue pops while you are alt-tabbed. Queue timer.", "M", new Color(0.35f, 0.9f, 0.7f), false, Cfg.MaOn, 38, "2026-10-17", isNew: true);
             _inst.Clear();
             foreach (var n in Cfg.Installed.Value.Split(new[] { (char)124 }, StringSplitOptions.RemoveEmptyEntries)) _inst.Add(n);
             foreach (var old in new[] { "Screen Vignette", "Neon Border", "Cursor Trail", "Particles", "UI Theme" })
@@ -149,7 +173,8 @@ namespace Euro3v3.ModsMenu
             IEnumerable<ModInfo> q = _mods;
             if (_tab == 0) q = q.Where(IsInstalled);
             if (_tab == 1) q = q.Where(m => m.Featured).OrderBy(m => IsInstalled(m) ? 1 : 0).ThenByDescending(m => m.Added);
-            if (_tab == 2) q = q.Where(m => m.Featured || IsInstalled(m)).OrderByDescending(m => m.Added).ThenByDescending(m => _mods.IndexOf(m));
+            if (_tab == 2) q = q.Where(m => m.IsNew).OrderByDescending(m => m.Added).ThenByDescending(m => _mods.IndexOf(m));
+            if (_tab == 3) q = q.Where(m => m.Pane >= 0).OrderBy(m => IsInstalled(m) ? 1 : 0).ThenByDescending(m => m.Featured).ThenByDescending(m => m.IsNew).ThenBy(m => m.Name);
             if (_onlyOn) q = q.Where(m => m.On != null && m.On.Value);
             if (!string.IsNullOrWhiteSpace(_search))
             {
@@ -208,15 +233,19 @@ namespace Euro3v3.ModsMenu
                 if (_view >= 0) _view = -1; else Features.PanelOpen = false;
             }
 
-            string[] tabs = { "INSTALLED", "FEATURED", "RECENT" };
+            int nInst = _mods.Count(IsInstalled), nNew = _mods.Count(m => m.IsNew);
+            int nAll = _mods.Count(m => m.Pane >= 0);
+            string[] tabs = { "INSTALLED  (" + nInst + ")", "FEATURED", "NEW  (" + nNew + ")", "DOWNLOAD  (" + nAll + ")" };
             float tx = 76f, tw = 170f;
             for (int i = 0; i < tabs.Length; i++)
             {
                 var r = new Rect(tx + i * (tw + 6), 14, tw, 44);
                 bool sel = _view < 0 && i == _tab;
-                G.Fill(r, sel ? GreenDark : (G.Hover(r) ? G.RowHover : G.Row));
-                G.Fill(new Rect(r.x, r.yMax - 3, r.width, 3), sel ? G.Accent : new Color(0, 0, 0, 0.25f));
-                G.Label(r, tabs[i], 14, sel ? G.Text : G.Dim, TextAnchor.MiddleCenter, true);
+                var gold = new Color(1f, 0.82f, 0.2f);
+                bool goldTab = i == 1;
+                G.Fill(r, sel ? (goldTab ? new Color(0.36f, 0.29f, 0.04f, 1f) : GreenDark) : (G.Hover(r) ? G.RowHover : G.Row));
+                G.Fill(new Rect(r.x, r.yMax - 3, r.width, 3), sel ? (goldTab ? gold : G.Accent) : (goldTab ? new Color(gold.r, gold.g, gold.b, 0.35f) : new Color(0, 0, 0, 0.25f)));
+                G.Label(r, tabs[i], 14, sel ? G.Text : (goldTab ? gold : G.Dim), TextAnchor.MiddleCenter, true);
                 if (G.Click(r)) { _tab = i; _view = -1; _page = 0; }
             }
 
@@ -247,7 +276,7 @@ namespace Euro3v3.ModsMenu
             var box = new Rect(20, 82, W - 40 - 3 * 52 - 12, 36);
             G.Fill(box, G.Panel);
             Outline(box, Border);
-            _search = G.TextField("modsearch", box, _search, "Search mods...");
+            _search = G.TextField("modsearch", box, _search, _tab == 3 ? "Search all mods to download..." : "Search mods...");
             if (_search.Length > 40) _search = _search.Substring(0, 40);
             var b1 = new Rect(box.xMax + 12, 82, 48, 36);
             var b2 = new Rect(b1.xMax + 4, 82, 48, 36);
@@ -266,7 +295,7 @@ namespace Euro3v3.ModsMenu
             if (list.Count == 0)
             {
                 string msg = _tab == 0 ? "No mods installed. Get some from the FEATURED tab." : _tab == 1 ? "Nothing here yet."
-                    : _tab == 2 ? "No mods yet."
+                    : _tab == 2 ? "No new mods right now."
                     : "No mods match your search.";
                 G.Label(new Rect(20, top + 60, W - 40, 40), msg, 16, G.Dim, TextAnchor.MiddleCenter);
             }
@@ -279,8 +308,9 @@ namespace Euro3v3.ModsMenu
                 var r = new Rect(20, top + i * (rowH + gap), W - 40, rowH);
                 bool hov = G.Hover(r);
                 bool on = m.On != null && m.On.Value;
-                G.Fill(r, hov ? new Color(0.15f, 0.165f, 0.18f, 1f) : G.Row);
-                G.Fill(new Rect(r.x, r.y, 3, r.height), on ? m.Tint : G.Off);
+                var gold = new Color(1f, 0.82f, 0.2f);
+                G.Fill(r, m.Featured ? (hov ? new Color(0.22f, 0.19f, 0.09f, 1f) : new Color(0.17f, 0.15f, 0.08f, 1f)) : (hov ? new Color(0.15f, 0.165f, 0.18f, 1f) : G.Row));
+                G.Fill(new Rect(r.x, r.y, 3, r.height), m.Featured ? gold : (on ? m.Tint : G.Off));
 
                 // icon tile
                 var ic = new Rect(r.x + 14, r.y + 7, 40, 40);
@@ -289,9 +319,12 @@ namespace Euro3v3.ModsMenu
 
                 // name, version chip, description
                 float nameW = MeasureWidth(m.Name, 17);
-                G.Label(new Rect(r.x + 68, r.y + 5, 360, 26), m.Name, 17, G.Text, TextAnchor.MiddleLeft, true);
-                if (!string.IsNullOrEmpty(m.Version)) G.Label(new Rect(r.x + 68 + nameW, r.y + 9, 70, 18), m.Version, 11, G.Dim);
-                if ((DateTime.Now - m.Added).TotalDays <= 7) Chip(new Rect(r.x + 68 + nameW + 52, r.y + 9, 36, 18), "NEW", new Color(0.05f, 0.1f, 0.05f), G.Accent);
+                G.Label(new Rect(r.x + 68, r.y + 5, 360, 26), m.Name, 17, m.Featured ? gold : G.Text, TextAnchor.MiddleLeft, true);
+                float chipX = r.x + 68 + nameW;
+                if (!string.IsNullOrEmpty(m.Version)) { G.Label(new Rect(chipX, r.y + 9, 70, 18), m.Version, 11, G.Dim); chipX += 52f; }
+                if (m.Featured) { Chip(new Rect(chipX, r.y + 9, 76, 18), "FEATURED", new Color(0.12f, 0.09f, 0f), gold); chipX += 82f; }
+                if (m.IsNew) { Chip(new Rect(chipX, r.y + 9, 40, 18), "NEW", new Color(0.05f, 0.1f, 0.05f), G.Accent); chipX += 46f; }
+                if (m.Joke) { G.Laugh(new Rect(chipX, r.y + 8, 20, 20)); chipX += 26f; }
                 G.Label(new Rect(r.x + 68, r.y + 29, 520, 20), m.Desc, 12, G.Dim);
 
                 // right side: GET (not installed) or switch + VIEW (installed)
@@ -316,7 +349,7 @@ namespace Euro3v3.ModsMenu
                 G.Label(view, "VIEW", 12, G.Text, TextAnchor.MiddleCenter, true);
                 if (G.Click(view)) { _view = _mods.IndexOf(m); _sel = m.Pane; }
 
-                if (m.On != null && _tab == 1)
+                if (m.On != null && (_tab == 1 || _tab == 3))
                 {
                     Chip(new Rect(view.x - 90, r.y + 17, 76, 20), "INSTALLED", G.Accent, new Color(0.1f, 0.3f, 0.12f, 1f));
                 }
@@ -338,12 +371,12 @@ namespace Euro3v3.ModsMenu
             var next = new Rect(64, by, 40, 34);
             if (G.Button(prev, "<") && _page > 0) _page--;
             if (G.Button(next, ">") && _page < pages - 1) _page++;
-            G.Label(new Rect(114, by, 260, 34), "Page " + (_page + 1) + " / " + pages + "     " + list.Count + " mod" + (list.Count == 1 ? "" : "s"), 13, G.Dim);
+            G.Label(new Rect(114, by, 560, 34), "Page " + (_page + 1) + " / " + pages + "     " + list.Count + " mod" + (list.Count == 1 ? "" : "s") + (_tab == 1 ? "     Featured: popular picks, worth downloading" : _tab == 2 ? "     New: just added" : _tab == 3 ? "     Every mod: search, then press GET" : ""), 13, _tab == 1 ? new Color(1f, 0.82f, 0.2f) : G.Dim);
             var reload = new Rect(W - 150, by, 130, 34);
             if (G.Button(reload, "RELOAD LIST")) Build();
         }
 
-        static float MeasureWidth(string s, int size) => s.Length * size * 0.56f + 8f;
+        static float MeasureWidth(string s, int size, bool bold = true) => G.TextWidth(s, size, bold) + 10f;
 
         static void DrawDetail()
         {
@@ -356,7 +389,8 @@ namespace Euro3v3.ModsMenu
             G.Fill(new Rect(ic.x, ic.y, ic.width, 2), m.Tint);
             G.Label(ic, m.Glyph, 30, m.Tint, TextAnchor.MiddleCenter, true);
             G.Label(new Rect(_rx + 70, _py, 500, 32), m.Name + "  " + m.Version, 24, G.Text, TextAnchor.MiddleLeft, true);
-            G.Label(new Rect(_rx + 70, _py + 32, 600, 24), m.Author + "  -  " + m.Desc, 13, G.Dim);
+            if (m.Joke) G.Laugh(new Rect(_rx + 80 + MeasureWidth(m.Name + "  " + m.Version, 24), _py + 5, 24, 24));
+            G.Label(new Rect(_rx + 70, _py + 31, 400, 40), m.Author + "  -  " + m.Desc, 12, G.Dim, TextAnchor.UpperLeft, false, true);
             if (m.On != null)
             {
                 G.Label(new Rect(W - 240, _py, 130, 56), "Enabled", 15, G.Text, TextAnchor.MiddleRight);
@@ -417,6 +451,21 @@ namespace Euro3v3.ModsMenu
                 case 21: GraphPane(); break;
                 case 22: NotesPane(); break;
                 case 23: BackupPane(); break;
+                case 24: KmPane(); break;
+                case 25: AnnPane(); break;
+                case 26: ConfPane(); break;
+                case 27: SessionPane(); break;
+                case 28: AimPane(); break;
+                case 29: LhPane(); break;
+                case 30: DtPane(); break;
+                case 31: StPane(); break;
+                case 32: SbPane(); break;
+                case 33: CmPane(); break;
+                case 34: CoachPane(); break;
+                case 35: CfPane(); break;
+                case 36: BtPane(); break;
+                case 37: PlPane(); break;
+                case 38: MaPane(); break;
             }
         }
 
@@ -488,7 +537,7 @@ namespace Euro3v3.ModsMenu
         static void Header(string t)
         {
             G.Fill(new Rect(_rx, _py + 11, _rw, 1), Border);
-            G.Label(new Rect(_rx, _py, 240, 22), t, 12, G.Accent, TextAnchor.MiddleLeft, true);
+            G.Label(new Rect(_rx, _py, 560, 22), t, 12, G.Accent, TextAnchor.MiddleLeft, true);
             _py += 26;
         }
 

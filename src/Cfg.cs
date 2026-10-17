@@ -17,6 +17,21 @@ namespace Euro3v3.ModsMenu
         public static ConfigEntry<int> StatsCorner, TintIdx, GraphCorner, NotesCorner;
         public static ConfigEntry<float> BarsSize, TintStrength, GraphScale, NotesSize;
         public static ConfigEntry<bool> HpLabelOn;
+        public static ConfigEntry<bool> KmOn, KmOthers, KmHead, AnnOn, AnnSound, ConfOn, ConfHead, ConfAssist, SsOn, SsOverlay, SsRoundEnd, SsPopup, AimOn, LhOn, LhPulse, LhSound, LhText;
+        public static ConfigEntry<float> LhThreshold, LhStrength, LhVol;
+        public static ConfigEntry<bool> DtOn, DtKiller, StOn, StText, SbOn, SbCard, CmOn;
+        public static ConfigEntry<int> DtStyle, CmMod;
+        public static ConfigEntry<float> DtSize, StMisses, StVol, SbDelay, CmCooldown;
+        public static ConfigEntry<string>[] CmMsgs = new ConfigEntry<string>[6];
+        public static ConfigEntry<bool> CoachOn, CoachRound, CoachMatch, CoachLive;
+        public static ConfigEntry<bool> CfOn, CfSpam, CfSwear, CfHide, MaOn, MaSound, MaFlash, MaTimer, PlOn, BtOn;
+        public static ConfigEntry<string> CfWords, CfBlock;
+        public static ConfigEntry<float> MaVol, BtTime;
+        public static ConfigEntry<int> BtMode;
+        public static ConfigEntry<int>[] BtBest = new ConfigEntry<int>[4];
+        public static ConfigEntry<int> CoachCorner;
+        public static ConfigEntry<int> KmCorner, SsCorner, AimMode, AimBest0, AimBest1;
+        public static ConfigEntry<float> KmTime, AnnSize, AnnVol, ConfAmount, AimTime, AimSize;
         public static ConfigEntry<string> NotesText;
         public static ConfigEntry<int> InputCorner, HitStyle, KillStyle, DmgPlace;
         public static ConfigEntry<float> InputScale, InputOpacity, HitVol, DmgSize, DmgTime;
@@ -90,6 +105,24 @@ namespace Euro3v3.ModsMenu
             NotesOn = B("Notes", "Enabled", false); NotesCorner = B("Notes", "Corner", 0); NotesSize = B("Notes", "TextSize", 16f); NotesText = B("Notes", "Text", "warm up | aim for the head");
             BackupOn = B("SettingsBackup", "Installed", false);
             HpLabelOn = B("HideGui", "HealthLabel", true);
+            KmOn = B("KillMessages", "Enabled", false); KmCorner = B("KillMessages", "Corner", 0); KmTime = B("KillMessages", "Seconds", 5f); KmOthers = B("KillMessages", "ShowOthers", false); KmHead = B("KillMessages", "TagHeadshots", true);
+            AnnOn = B("Announcer", "Enabled", false); AnnSize = B("Announcer", "Size", 52f); AnnSound = B("Announcer", "Sound", true); AnnVol = B("Announcer", "Volume", 0.7f);
+            ConfOn = B("KillConfetti", "Enabled", false); ConfAmount = B("KillConfetti", "Amount", 140f); ConfHead = B("KillConfetti", "DoubleOnHeadshot", true); ConfAssist = B("KillConfetti", "OnAssists", false);
+            SsOn = B("SessionStats", "Enabled", false); SsOverlay = B("SessionStats", "Overlay", true); SsCorner = B("SessionStats", "Corner", 1); SsRoundEnd = B("SessionStats", "RoundEnd", true); SsPopup = B("SessionStats", "Popup", true);
+            DtOn = B("DeathTaunts", "Enabled", false); DtStyle = B("DeathTaunts", "Style", 0); DtSize = B("DeathTaunts", "TextSize", 46f); DtKiller = B("DeathTaunts", "UseKillerName", true);
+            StOn = B("SadTrombone", "Enabled", false); StMisses = B("SadTrombone", "MissesInARow", 5f); StVol = B("SadTrombone", "Volume", 0.7f); StText = B("SadTrombone", "Text", true);
+            SbOn = B("ScoreboardShot", "Enabled", false); SbCard = B("ScoreboardShot", "DrawResultCard", true); SbDelay = B("ScoreboardShot", "DelaySeconds", 2f);
+            CmOn = B("ChatMacros", "Enabled", false); CmMod = B("ChatMacros", "Modifier", 0); CmCooldown = B("ChatMacros", "CooldownSeconds", 2f);
+            { var defs = new[] { "gg", "nice shot!", "need help!", "watch out!", "good game, well played", "thanks!" }; for (int i = 0; i < 6; i++) CmMsgs[i] = B("ChatMacros", "Message" + (i + 1), defs[i]); }
+            CoachOn = B("Coach", "Enabled", false); CoachRound = B("Coach", "RoundTips", true); CoachMatch = B("Coach", "MatchSummary", true); CoachLive = B("Coach", "LiveStrip", true); CoachCorner = B("Coach", "StripCorner", 1);
+            CfOn = B("ChatFilter", "Enabled", false); CfSpam = B("ChatFilter", "HideSpam", true); CfSwear = B("ChatFilter", "FilterSwearing", true); CfHide = B("ChatFilter", "HideWholeMessage", false); CfWords = B("ChatFilter", "BlockedWords", ""); CfBlock = B("ChatFilter", "BlockedPlayers", "");
+            MaOn = B("MatchAlert", "Enabled", false); MaSound = B("MatchAlert", "Chime", true); MaFlash = B("MatchAlert", "FlashTaskbar", true); MaTimer = B("MatchAlert", "QueueTimer", true); MaVol = B("MatchAlert", "Volume", 0.7f);
+            PlOn = B("Practice", "Enabled", false);
+            BtOn = B("BuildTrainer", "Enabled", false); BtMode = B("BuildTrainer", "Drill", 0); BtTime = B("BuildTrainer", "Seconds", 30f);
+            { var bn = new[] { "BestAny", "BestWalls", "BestFloors", "BestStairs" }; for (int i = 0; i < 4; i++) BtBest[i] = B("BuildTrainer", bn[i], 0); }
+            LhOn = B("LowHealth", "Enabled", false); LhPulse = B("LowHealth", "Pulse", true); LhSound = B("LowHealth", "Heartbeat", true); LhText = B("LowHealth", "Text", true);
+            LhThreshold = B("LowHealth", "BelowPercent", 30f); LhStrength = B("LowHealth", "Strength", 0.7f); LhVol = B("LowHealth", "Volume", 0.6f);
+            AimOn = B("AimTrainer", "Enabled", false); AimMode = B("AimTrainer", "Mode", 0); AimTime = B("AimTrainer", "Seconds", 60f); AimSize = B("AimTrainer", "TargetSize", 0.7f); AimBest0 = B("AimTrainer", "BestGridshot", 0); AimBest1 = B("AimTrainer", "BestFlick", 0);
             HideOn = B("HideGui", "Enabled", true); HideAds = B("HideGui", "Ads", true); HideNews = B("HideGui", "News", true); HideFeedback = B("HideGui", "FeedbackButton", true); HideVersion = B("HideGui", "VersionText", true);
             HideTasks = B("HideGui", "Tasks", false); HideQuest = B("HideGui", "Quest", false); HideLevel = B("HideGui", "LevelBar", false); HideParty = B("HideGui", "Party", false);
             HideDials = B("HideGui", "CompassAndDials", true); HideAtm = B("HideGui", "AtmInfo", false); HideIngameLevel = B("HideGui", "InGameLevel", false);

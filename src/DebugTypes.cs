@@ -32,6 +32,23 @@ namespace Euro3v3.ModsMenu
                 try { types = asm.GetTypes(); } catch (ReflectionTypeLoadException e) { types = e.Types.Where(t => t != null).ToArray(); }
                 foreach (var w in wanted)
                 {
+                    if (w.StartsWith("~"))
+                    {
+                        var key2 = w.Substring(1); int n2 = 0;
+                        sb.AppendLine("## members containing '" + key2 + "':");
+                        var fl = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+                        foreach (var t2 in types)
+                        {
+                            foreach (var mi in Safe(() => t2.GetMembers(fl)))
+                            {
+                                if (mi.Name.IndexOf(key2, StringComparison.OrdinalIgnoreCase) < 0 || mi.Name.StartsWith("UserCode_") || mi.Name.StartsWith("InvokeUserCode") || mi.Name.Contains("Mirror_")) continue;
+                                sb.AppendLine("   " + t2.Name + "." + mi.Name + "  [" + mi.MemberType + "]");
+                                if (++n2 > 400) break;
+                            }
+                            if (n2 > 400) break;
+                        }
+                        continue;
+                    }
                     if (w.StartsWith("*"))
                     {
                         var key = w.Substring(1);
